@@ -40,8 +40,8 @@ export default class BreathingSlide extends Component {
 
 BreathingSlide.propTypes = {
     slideAction: PropTypes.string,
-    onSlideEnd: PropTypes.function,
-    finishSlide: PropTypes.function,
+    // onSlideEnd: PropTypes.function,
+    // finishSlide: PropTypes.function,
 };
 
 const styles = StyleSheet.create({

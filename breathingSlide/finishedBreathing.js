@@ -49,7 +49,7 @@ export default class FinishedBreathing extends Component {
 }
 
 FinishedBreathing.propTypes = {
-    onSlideEnd: PropTypes.function,
+    // onSlideEnd: PropTypes.function,
 };
 
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet, Button } from 'react-native';
 
 import BreathingSlide from './breathingSlide/breathingSlide';
+import PlayerActionButton from './playerActionButton';
 
 export default class ProcessingEngine extends Component {
     constructor(props) {
@@ -15,25 +16,39 @@ export default class ProcessingEngine extends Component {
 
     finishSlide = () => { this.setState({ currentSlideAction: 'finish' }); }
 
-    togglePause = () => {
-        if (this.state.currentSlideAction === 'play') {
-            this.setState({ currentSlideAction: 'pause' });
-        } else {
-            this.setState({ currentSlideAction: 'play' });
+    createExecuteSlideAction = () => {
+        const currentSlideAction = this.state.currentSlideAction;
+
+        let executeSlideAction;
+
+        switch(currentSlideAction) {
+            case 'play':
+                executeSlideAction = () => { this.setState({ currentSlideAction: 'pause' }); };
+                break;
+            case 'pause':
+                executeSlideAction = () => { this.setState({ currentSlideAction: 'play' }); };
+                break;
+            default:
+                executeSlideAction = () => { console.log('BUTTON WORKEd'); };
+                break;
         }
+
+        return executeSlideAction;
     }
 
     render() {
+        const currentSlideAction = this.state.currentSlideAction;
+
         return (
             <View style={styles.container}>
                 <BreathingSlide
-                    slideAction={this.state.currentSlideAction}
+                    slideAction={currentSlideAction}
                     finishSlide={this.finishSlide}
                     onSlideEnd={() => { console.log('Done LMAO'); }}
                 />
-                <Button
-                    onPress={this.togglePause}
-                    title="Pause"
+                <PlayerActionButton
+                    executeSlideAction={this.createExecuteSlideAction()}
+                    currentSlideAction={currentSlideAction}
                 />
             </View>
         );

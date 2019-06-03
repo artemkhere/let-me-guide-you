@@ -17,7 +17,7 @@ export default class PlayingBreathing extends Component {
     breathIn = () => {
         Animated.timing(this.state.backgroundBallSize, {
             toValue: 300,
-            duration: 4000,
+            duration: 3000,
             easing: Easing.linear,
         }).start((event) => {
             if (event.finished) {
@@ -30,7 +30,7 @@ export default class PlayingBreathing extends Component {
     breathOut = () => {
         Animated.timing(this.state.backgroundBallSize, {
             toValue: 100,
-            duration: 7000,
+            duration: 6000,
             easing: Easing.linear,
         }).start((event) => {
             if (event.finished) { this.props.finishSlide(); }
@@ -58,7 +58,7 @@ export default class PlayingBreathing extends Component {
 }
 
 PlayingBreathing.propTypes = {
-    finishSlide: PropTypes.function,
+    // finishSlide: PropTypes.function,
 };
 
 const styles = StyleSheet.create({
