@@ -2,25 +2,38 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
 
+// add this breathingLoopFormat: [3, 2, 4, 5]
+// holdBreathText
+
 export default class PlayingBreathing extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             backgroundBallSize: new Animated.Value(100),
+            holdBreathBallOpacity: new Animated.Value(0),
             frontText: 'Breath In',
+            breathingLoopFormat: [4, 1.5, 4, 1],
         }
     }
 
     componentDidMount() { this.breathIn(); }
 
     breathIn = () => {
-        Animated.timing(this.state.backgroundBallSize, {
+        const {
+            backgroundBallSize,
+            breathingLoopFormat
+        } = this.state;
+
+        Animated.timing(backgroundBallSize, {
             toValue: 300,
-            duration: 3000,
-            easing: Easing.linear,
-        }).start((event) => {
-            if (event.finished) {
+            duration: breathingLoopFormat[0] * 1000,
+            easing: Easing.inOut(Easing.quad)
+        }).start(() => {
+            if (breathingLoopFormat[0] > 0) {
+                this.setState({ frontText: 'Hold Breath' });
+                this.holdBreath(breathingLoopFormat[1], this.breathOut);
+            } else {
                 this.setState({ frontText: 'Breath Out' });
                 this.breathOut();
             }
@@ -28,19 +41,50 @@ export default class PlayingBreathing extends Component {
     }
 
     breathOut = () => {
+        const {
+            backgroundBallSize,
+            breathingLoopFormat
+        } = this.state;
+
         Animated.timing(this.state.backgroundBallSize, {
-            toValue: 100,
-            duration: 6000,
-            easing: Easing.linear,
+            toValue: 180,
+            duration: breathingLoopFormat[2] * 1000,
+            easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (event.finished) { this.props.finishSlide(); }
+            if (breathingLoopFormat[3] > 0) {
+                this.setState({ frontText: 'Hold Breath' });
+                this.holdBreath(breathingLoopFormat[3], this.props.finishSlide);
+            } else if (event.finished) {
+                this.props.finishSlide();
+            }
+        })
+    }
+
+    holdBreath = (duration, nextAction) => {
+        Animated.sequence([
+            Animated.timing(this.state.holdBreathBallOpacity, {
+                toValue: 1,
+                duration: duration * 500,
+                easing: Easing.inOut(Easing.quad)
+            }),
+            Animated.timing(this.state.holdBreathBallOpacity, {
+                toValue: 0,
+                duration: duration * 500,
+                easing: Easing.inOut(Easing.quad)
+            })
+        ]).start((event) => {
+            if (event.finished) {
+                this.setState({ frontText: 'Breath Out' });
+                nextAction();
+            }
         })
     }
 
     render() {
         const {
             backgroundBallSize,
-            frontText
+            holdBreathBallOpacity,
+            frontText,
         } = this.state;
 
         return (
@@ -52,13 +96,17 @@ export default class PlayingBreathing extends Component {
                 },
             ]}>
                 <Text style={styles.frontText}>{frontText}</Text>
+                <Animated.View style={[
+                    styles.holdBreathBall,
+                    { opacity: holdBreathBallOpacity },
+                ]} />
             </Animated.View>
         );
     }
 }
 
 PlayingBreathing.propTypes = {
-    // finishSlide: PropTypes.function,
+    finishSlide: PropTypes.function,
 };
 
 const styles = StyleSheet.create({
@@ -70,6 +118,16 @@ const styles = StyleSheet.create({
         borderRadius: 300,
         width: 100,
         height: 100,
+    },
+    holdBreathBall: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'tomato',
+        borderRadius: 120,
+        opacity: 0,
+        width: 120,
+        height: 120,
     },
     frontText: {
         fontSize: 24,

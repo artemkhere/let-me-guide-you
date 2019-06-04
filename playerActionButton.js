@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Button } from 'react-native';
-import Icon from "react-native-vector-icons/Ionicons";
+import { View, StyleSheet, Text, Button } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class PlayerActionButton extends Component {
     constructor(props) { super(props); }
@@ -29,16 +29,15 @@ export default class PlayerActionButton extends Component {
     render() {
         return (
             <View>
-                <Button
+                <Icon
+                    name="facebook"
+                    name="ios-add"
+                    color="#ccc"
+                    size={25}
                     onPress={this.props.executeSlideAction}
-                    title={this.renderTitle()}
                 >
-                    <Icon
-                        name="ios-add"
-                        color="#ccc"
-                        size={25}
-                    />
-                </Button>
+                    <Text style={styles.text}>{this.renderTitle()}</Text>
+                </Icon>
             </View>
         );
     }
