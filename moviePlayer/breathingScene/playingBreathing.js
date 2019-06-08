@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
 
-// add this breathingLoopFormat: [3, 2, 4, 5]
-// holdBreathText
-
 export default class PlayingBreathing extends Component {
     constructor(props) {
         super(props);
@@ -13,27 +10,24 @@ export default class PlayingBreathing extends Component {
             backgroundBallSize: new Animated.Value(100),
             holdBreathBallOpacity: new Animated.Value(0),
             frontText: 'Breath In',
-            breathingLoopFormat: [4, 1.5, 4, 1],
         }
     }
 
     componentDidMount() { this.breathIn(); }
 
     breathIn = () => {
-        const {
-            backgroundBallSize,
-            breathingLoopFormat
-        } = this.state;
+        const backgroundBallSize = this.state.backgroundBallSize;
+        const sceneScenario = this.props.sceneScenario;
 
         Animated.timing(backgroundBallSize, {
             toValue: 300,
-            duration: breathingLoopFormat[0] * 1000,
+            duration: sceneScenario[0] * 1000,
             easing: Easing.inOut(Easing.quad)
-        }).start(() => {
-            if (breathingLoopFormat[0] > 0) {
+        }).start((event) => {
+            if (sceneScenario[1] > 0) {
                 this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(breathingLoopFormat[1], this.breathOut);
-            } else {
+                this.holdBreath(sceneScenario[1], this.breathOut);
+            } else if (event.finished) {
                 this.setState({ frontText: 'Breath Out' });
                 this.breathOut();
             }
@@ -42,32 +36,36 @@ export default class PlayingBreathing extends Component {
 
     breathOut = () => {
         const {
-            backgroundBallSize,
-            breathingLoopFormat
-        } = this.state;
+            sceneScenario,
+            handleSceneEnd
+        } = this.props;
 
-        Animated.timing(this.state.backgroundBallSize, {
+        const backgroundBallSize = this.state.backgroundBallSize;
+
+        Animated.timing(backgroundBallSize, {
             toValue: 180,
-            duration: breathingLoopFormat[2] * 1000,
+            duration: sceneScenario[2] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (breathingLoopFormat[3] > 0) {
+            if (sceneScenario[3] > 0) {
                 this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(breathingLoopFormat[3], this.props.finishSlide);
+                this.holdBreath(sceneScenario[3], handleSceneEnd);
             } else if (event.finished) {
-                this.props.finishSlide();
+                handleSceneEnd();
             }
         })
     }
 
     holdBreath = (duration, nextAction) => {
+        const holdBreathBallOpacity = this.state.holdBreathBallOpacity;
+
         Animated.sequence([
-            Animated.timing(this.state.holdBreathBallOpacity, {
+            Animated.timing(holdBreathBallOpacity, {
                 toValue: 1,
                 duration: duration * 500,
                 easing: Easing.inOut(Easing.quad)
             }),
-            Animated.timing(this.state.holdBreathBallOpacity, {
+            Animated.timing(holdBreathBallOpacity, {
                 toValue: 0,
                 duration: duration * 500,
                 easing: Easing.inOut(Easing.quad)
@@ -106,7 +104,8 @@ export default class PlayingBreathing extends Component {
 }
 
 PlayingBreathing.propTypes = {
-    finishSlide: PropTypes.function,
+    sceneScenario: PropTypes.array,
+    handleSceneEnd: PropTypes.function,
 };
 
 const styles = StyleSheet.create({

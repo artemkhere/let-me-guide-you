@@ -7,19 +7,20 @@ export default class PlayerActionButton extends Component {
     constructor(props) { super(props); }
 
     renderTitle = () => {
-        const currentSlideAction = this.props.currentSlideAction;
-
         let title;
 
-        switch(currentSlideAction) {
+        switch(this.props.currentSceneState) {
             case 'play':
                 title = 'Pause';
                 break;
             case 'pause':
                 title = 'Play';
                 break;
-            default:
+            case 'finish':
                 title = 'Check Mark';
+                break;
+            default:
+                title = 'Something went wrong in the Player Action Button.';
                 break;
         }
 
@@ -34,7 +35,7 @@ export default class PlayerActionButton extends Component {
                     name="ios-add"
                     color="#ccc"
                     size={25}
-                    onPress={this.props.executeSlideAction}
+                    onPress={this.props.changeSceneState}
                 >
                     <Text style={styles.text}>{this.renderTitle()}</Text>
                 </Icon>
@@ -44,10 +45,11 @@ export default class PlayerActionButton extends Component {
 }
 
 PlayerActionButton.propTypes = {
-    executeSlideAction: PropTypes.function,
-    currentSlideAction: PropTypes.string,
+    changeSceneState: PropTypes.function,
+    currentSceneState: PropTypes.string,
 };
 
-const styles = StyleSheet.create({
 
+const styles = StyleSheet.create({
+    // style the button
 });
