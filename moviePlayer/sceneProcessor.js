@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
-import BreathingScene from './breathingScene/breathingScene';
+import BreathingScene from '../scenes/breathingScene/breathingScene';
 import PlayerActionButton from './playerActionButton';
 
 export default class SceneProcessor extends Component {
