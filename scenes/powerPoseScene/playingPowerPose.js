@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Text, Image, View } from 'react-native';
-
 import ProgressCircle from 'react-native-progress-circle';
+
+import PowerPoseImage from './images/powerPoseImage';
 
 export default class PlayingBreathing extends Component {
     constructor(props) {
@@ -64,15 +65,9 @@ export default class PlayingBreathing extends Component {
                     shadowColor="#999"
                     bgColor="#fff"
                 >
-                    <Image
-                        style={{ width: 50 }}
-                        source={require('./images/power_pose_1_v1.svg')}
-                    />
                 </ProgressCircle>
+                <PowerPoseImage />
                 <Text>Strike a Power Pose</Text>
-                <Image
-                    source={require('./images/power_pose_1_v1.svg')}
-                />
             </View>
         );
     }
