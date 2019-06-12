@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Text, Image, View } from 'react-native';
+import { Animated, Text, Image, View, Vibration } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 
 import PowerPoseImage from './images/powerPoseImage';
@@ -39,7 +39,10 @@ export default class PlayingBreathing extends Component {
             toValue: 100,
             duration: sceneScenario[0] * 1000
         }).start((event) => {
-            if (event.finished) { handleSceneEnd(); }
+            if (event.finished) {
+                Vibration.vibrate(500);
+                handleSceneEnd();
+            }
         });
 
         const progressValueListener = progressCircleCompletion.addListener(({ value }) => {
