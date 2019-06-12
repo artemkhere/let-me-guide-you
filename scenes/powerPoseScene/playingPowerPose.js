@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Text, View } from 'react-native';
+import { Animated, Text, Image, View } from 'react-native';
 
 import ProgressCircle from 'react-native-progress-circle';
 
@@ -10,11 +10,21 @@ export default class PlayingBreathing extends Component {
 
         this.state = {
             progressCircleCompletion: new Animated.Value(0),
-            progressCircleCompletionValue: 0
+            progressCircleCompletionValue: 0,
+            progressValueListener: null
         }
     }
 
     componentDidMount() { this.startProgressAnimation(); }
+
+    componentWillUnmount() {
+        const {
+            progressCircleCompletion,
+            progressValueListener
+        } = this.state;
+
+        progressCircleCompletion.removeListener(progressValueListener);
+    }
 
     startProgressAnimation = () => {
         const {
@@ -24,16 +34,18 @@ export default class PlayingBreathing extends Component {
 
         const progressCircleCompletion = this.state.progressCircleCompletion;
 
-        progressCircleCompletion.addListener(({ value }) => {
-            this.setState({ progressCircleCompletionValue: Math.ceil(value) });
-        });
-
         Animated.timing(progressCircleCompletion, {
             toValue: 100,
             duration: sceneScenario[0] * 1000
         }).start((event) => {
             if (event.finished) { handleSceneEnd(); }
-        })
+        });
+
+        const progressValueListener = progressCircleCompletion.addListener(({ value }) => {
+            this.setState({ progressCircleCompletionValue: Math.ceil(value) });
+        });
+
+        this.setState({ progressValueListener });
     }
 
     render() {
@@ -52,9 +64,15 @@ export default class PlayingBreathing extends Component {
                     shadowColor="#999"
                     bgColor="#fff"
                 >
-                    <Text style={{ fontSize: 18 }}>Power Pose Image</Text>
+                    <Image
+                        style={{ width: 50 }}
+                        source={require('./images/power_pose_1_v1.svg')}
+                    />
                 </ProgressCircle>
                 <Text>Strike a Power Pose</Text>
+                <Image
+                    source={require('./images/power_pose_1_v1.svg')}
+                />
             </View>
         );
     }
