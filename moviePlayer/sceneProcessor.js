@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
 import BreathingScene from '../scenes/breathingScene/breathingScene';
+import PowerPoseScene from '../scenes/powerPoseScene/powerPoseScene';
 import PlayerActionButton from './playerActionButton';
 
 export default class SceneProcessor extends Component {
@@ -45,7 +46,7 @@ export default class SceneProcessor extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <BreathingScene
+                <PowerPoseScene
                     sceneState={this.state.currentSceneState}
                     handleSceneEnd={this.handleSceneEnd}
                     sceneScenario={this.props.sceneScenario}

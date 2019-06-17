@@ -10,7 +10,7 @@ export default class MovieEnvironment extends Component {
             <View style={styles.container}>
                 <SceneProcessor
                     onSceneEnd={() => { console.log('Play next scene, or finish the scene and wait for user to press the action button.'); }}
-                    sceneScenario={[4, 1.5, 4, 1]}
+                    sceneScenario={[10]}
                     playerButtonActionOnFinishedScene={() => { console.log('Play next scene on button press, or interact with the player once scene is over.'); }}
                 />
             </View>
