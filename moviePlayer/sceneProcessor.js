@@ -45,16 +45,20 @@ export default class SceneProcessor extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <PowerPoseScene
-                    sceneState={this.state.currentSceneState}
-                    handleSceneEnd={this.handleSceneEnd}
-                    sceneScenario={this.props.sceneScenario}
-                />
-                <PlayerActionButton
-                    changeSceneState={this.createSceneStateHandler()}
-                    currentSceneState={this.state.currentSceneState}
-                />
+            <View style={styles.sceneProcessor}>
+                <View style={styles.scenePlayground}>
+                    <PowerPoseScene
+                        sceneState={this.state.currentSceneState}
+                        handleSceneEnd={this.handleSceneEnd}
+                        sceneScenario={this.props.sceneScenario}
+                    />
+                </View>
+                <View style={styles.actionButtonContainer}>
+                    <PlayerActionButton
+                        changeSceneState={this.createSceneStateHandler()}
+                        currentSceneState={this.state.currentSceneState}
+                    />
+                </View>
             </View>
         );
     }
@@ -67,9 +71,21 @@ SceneProcessor.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    container: {
+    sceneProcessor: {
+        width: '100%',
+        height: '100%',
+    },
+    scenePlayground: {
         width: '100%',
         flex: 1,
         backgroundColor: '#ecf0f1',
+    },
+    actionButtonContainer: {
+        width: '100%',
+        height: 80,
+        paddingBottom: 16,
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: '#201633',
     },
 });

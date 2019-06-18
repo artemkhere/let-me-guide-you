@@ -67,7 +67,7 @@ export default class PlayingBreathing extends Component {
                     percent={progressCircleCompletionValue}
                     radius={120}
                     borderWidth={8}
-                    color="#E2B2B7"
+                    color="#B38C97"
                     shadowColor="#382943"
                     bgColor="#201633"
                 >

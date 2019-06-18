@@ -1,44 +1,41 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class PlayerActionButton extends Component {
     constructor(props) { super(props); }
 
-    renderTitle = () => {
-        let title;
+    getIconName = () => {
+        let iconName;
 
         switch(this.props.currentSceneState) {
             case 'play':
-                title = 'Pause';
+                iconName = 'ios-pause';
                 break;
             case 'pause':
-                title = 'Play';
+                iconName = 'ios-play';
                 break;
             case 'finish':
-                title = 'Check Mark';
+                iconName = 'ios-confirmation';
                 break;
             default:
-                title = 'Something went wrong in the Player Action Button.';
+                iconName = 'Something went wrong in the Player Action Button.';
                 break;
         }
 
-        return title;
+        return iconName;
     }
 
     render() {
         return (
             <View>
                 <Icon
-                    name="facebook"
-                    name="ios-add"
-                    color="#ccc"
-                    size={25}
+                    name={this.getIconName()}
+                    color="#FFD1D5"
+                    size={48}
                     onPress={this.props.changeSceneState}
-                >
-                    <Text style={styles.text}>{this.renderTitle()}</Text>
-                </Icon>
+                />
             </View>
         );
     }
@@ -48,8 +45,3 @@ PlayerActionButton.propTypes = {
     changeSceneState: PropTypes.function,
     currentSceneState: PropTypes.string,
 };
-
-
-const styles = StyleSheet.create({
-    // style the button
-});
