@@ -44,7 +44,7 @@ export default class PowerPoseScene extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.sceneContainer}>
                 {this.renderSceneBasedOnState()}
             </View>
         );
@@ -58,9 +58,12 @@ PowerPoseScene.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    container: {
+    sceneContainer: {
         width: '100%',
-        flex: 1,
-        backgroundColor: '#ecf0f1',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#201633',
     },
 });

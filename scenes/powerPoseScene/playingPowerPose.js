@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Text, Image, View, Vibration } from 'react-native';
+import { Animated, Text, Image, View, Vibration, StyleSheet } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 
 import PowerPoseImage from './images/powerPoseImage';
@@ -12,7 +12,8 @@ export default class PlayingBreathing extends Component {
         this.state = {
             progressCircleCompletion: new Animated.Value(0),
             progressCircleCompletionValue: 0,
-            progressValueListener: null
+            progressValueListener: null,
+            progressCircleAnimationProcess: null,
         }
     }
 
@@ -21,10 +22,12 @@ export default class PlayingBreathing extends Component {
     componentWillUnmount() {
         const {
             progressCircleCompletion,
-            progressValueListener
+            progressValueListener,
+            progressCircleAnimationProcess,
         } = this.state;
 
         progressCircleCompletion.removeListener(progressValueListener);
+        Animated.timing(progressCircleCompletion).stop();
     }
 
     startProgressAnimation = () => {
@@ -46,7 +49,7 @@ export default class PlayingBreathing extends Component {
         });
 
         const progressValueListener = progressCircleCompletion.addListener(({ value }) => {
-            this.setState({ progressCircleCompletionValue: Math.ceil(value) });
+            this.setState({ progressCircleCompletionValue: value });
         });
 
         this.setState({ progressValueListener });
@@ -59,25 +62,47 @@ export default class PlayingBreathing extends Component {
         } = this.state;
 
         return (
-            <View>
+            <View style={styles.sceneArrangment}>
                 <ProgressCircle
                     percent={progressCircleCompletionValue}
-                    radius={50}
+                    radius={120}
                     borderWidth={8}
-                    color="#3399FF"
-                    shadowColor="#999"
-                    bgColor="#fff"
+                    color="#E2B2B7"
+                    shadowColor="#382943"
+                    bgColor="#201633"
                 >
+                    <PowerPoseImage />
                 </ProgressCircle>
-                <PowerPoseImage />
-                <Text>Strike a Power Pose</Text>
+                <View style={styles.instructionsContainer}>
+                    <Text style={styles.instructionsText}>Hold a Power Pose</Text>
+                </View>
             </View>
         );
     }
 }
 
-
 PlayingBreathing.propTypes = {
     sceneScenario: PropTypes.array,
     handleSceneEnd: PropTypes.function,
 };
+
+const styles = StyleSheet.create({
+    sceneArrangment: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+    },
+    instructionsContainer: {
+        width: '100%',
+        marginTop: 48,
+        display: 'flex',
+        alignItems: 'center'
+    },
+    instructionsText: {
+        fontSize: 20,
+        color: '#FFD1D5',
+    },
+});
