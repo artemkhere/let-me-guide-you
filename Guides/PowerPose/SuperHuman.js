@@ -5,7 +5,7 @@ import ProgressCircle from 'react-native-progress-circle';
 
 import PowerPoseImage from './images/powerPoseImage';
 
-export default class PlayingBreathing extends Component {
+export default class SuperHumanPowerPose extends Component {
     constructor(props) {
         super(props);
 
@@ -81,7 +81,7 @@ export default class PlayingBreathing extends Component {
     }
 }
 
-PlayingBreathing.propTypes = {
+SuperHumanPowerPose.propTypes = {
     sceneScenario: PropTypes.array,
     handleSceneEnd: PropTypes.function,
 };

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
+import PlayerActionButton from 'PlayerActionButton';
+
 import GuideBreathingNormal from 'Guides/Breathing/Normal';
 import GuideBreathingPause from 'Guides/Breathing/Pause';
 import GuideBreathingFinished from 'Guides/Breathing/Finished';
