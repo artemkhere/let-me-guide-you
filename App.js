@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import MovieEnvironment from './moviePlayer/movieEnvironment';
+import SessionPlayer from 'SessionPlayer';
 
 export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <MovieEnvironment />
+                <SessionPlayer />
             </View>
         );
     }
