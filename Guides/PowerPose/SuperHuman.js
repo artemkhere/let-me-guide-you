@@ -32,19 +32,19 @@ export default class SuperHumanPowerPose extends Component {
 
     startProgressAnimation = () => {
         const {
-            sceneScenario,
-            handleSceneEnd,
+            stepDuration,
+            onInstructionEnd,
         } = this.props;
 
         const progressCircleCompletion = this.state.progressCircleCompletion;
 
         Animated.timing(progressCircleCompletion, {
             toValue: 100,
-            duration: sceneScenario[0] * 1000
+            duration: stepDuration[0] * 1000
         }).start((event) => {
             if (event.finished) {
                 Vibration.vibrate(500);
-                handleSceneEnd();
+                onInstructionEnd();
             }
         });
 
@@ -82,8 +82,8 @@ export default class SuperHumanPowerPose extends Component {
 }
 
 SuperHumanPowerPose.propTypes = {
-    sceneScenario: PropTypes.array,
-    handleSceneEnd: PropTypes.function,
+    stepDuration: PropTypes.array,
+    onInstructionEnd: PropTypes.function,
 };
 
 const styles = StyleSheet.create({
