@@ -76,7 +76,11 @@ export default class SessionPlayer extends Component {
         };
     }
 
-    function onInstructionEndHandler {
+    onInstructionEndHandler = () => {
+        incrementInstructionOrGuide();
+    }
+
+    incrementInstructionOrGuide = () => {
         const nextInstruction =
             this.session[currentGuideIndex]
                 .instructions[currentInstructionIndex + 1];
@@ -111,6 +115,22 @@ export default class SessionPlayer extends Component {
         }
     }
 
+    actionButtonHandler = () => {
+        const { guideState } = this.state;
+
+        switch(guideState) {
+            case 'playing':
+                this.setState({ guideState: 'paused' });
+                break;
+            case 'paused':
+                this.setState({ guideState: 'playing' });
+                break;
+            case 'finished':
+                incrementInstructionOrGuide();
+                break;
+        }
+    }
+
     render() {
         const {
             currentGuide,
@@ -136,14 +156,14 @@ export default class SessionPlayer extends Component {
                 <View style={styles.sceneProcessor}>
                     <View style={styles.scenePlayground}>
                         <CurrentGuide
-                            onInstructionEnd={onInstructionEndHandler}
+                            onInstructionEnd={this.onInstructionEndHandler}
                             stageDuration={currentInstruction.stageDuration}
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>
                         <PlayerActionButton
-                            changeSceneState={this.createSceneStateHandler()}
-                            currentSceneState={this.state.currentSceneState}
+                            onPress={this.actionButtonHandler}
+                            guideState={this.state.guideState}
                         />
                     </View>
                 </View>

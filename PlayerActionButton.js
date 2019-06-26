@@ -9,14 +9,14 @@ export default class PlayerActionButton extends Component {
     getIconName = () => {
         let iconName;
 
-        switch(this.props.currentSceneState) {
-            case 'play':
+        switch(this.props.guideState) {
+            case 'playing':
                 iconName = 'ios-pause';
                 break;
-            case 'pause':
+            case 'paused':
                 iconName = 'ios-play';
                 break;
-            case 'finish':
+            case 'finished':
                 iconName = 'ios-confirmation';
                 break;
             default:
@@ -34,7 +34,7 @@ export default class PlayerActionButton extends Component {
                     name={this.getIconName()}
                     color="#FFD1D5"
                     size={48}
-                    onPress={this.props.changeSceneState}
+                    onPress={this.props.onPress}
                 />
             </View>
         );
@@ -43,5 +43,5 @@ export default class PlayerActionButton extends Component {
 
 PlayerActionButton.propTypes = {
     changeSceneState: PropTypes.function,
-    currentSceneState: PropTypes.string,
+    guideState: PropTypes.string,
 };
