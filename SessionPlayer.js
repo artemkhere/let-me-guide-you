@@ -43,7 +43,7 @@ export default class SessionPlayer extends Component {
         this.state = {
             guideState: 'playing', // 'playing', 'paused', 'finished'
             currentGuideIndex: 0,
-            currentGuide: this.session[0].guide,
+            currentGuide: this.session[0],
             currentInstructionIndex: 0,
             currentInstruction: this.session[0].instructions[0],
         };

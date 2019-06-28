@@ -32,7 +32,7 @@ export default class Playing extends Component {
 
     startProgressAnimation = () => {
         const {
-            stepDuration,
+            stageDuration,
             onInstructionEnd,
         } = this.props;
 
@@ -40,7 +40,7 @@ export default class Playing extends Component {
 
         Animated.timing(progressCircleCompletion, {
             toValue: 100,
-            duration: stepDuration[0] * 1000
+            duration: stageDuration[0] * 1000
         }).start((event) => {
             if (event.finished) {
                 Vibration.vibrate(500);
@@ -81,8 +81,8 @@ export default class Playing extends Component {
     }
 }
 
-SuperHumanPowerPose.propTypes = {
-    stepDuration: PropTypes.array,
+Playing.propTypes = {
+    stageDuration: PropTypes.array,
     onInstructionEnd: PropTypes.function,
 };
 

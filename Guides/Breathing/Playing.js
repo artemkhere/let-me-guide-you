@@ -17,16 +17,16 @@ export default class Playing extends Component {
 
     breathIn = () => {
         const backgroundBallSize = this.state.backgroundBallSize;
-        const stepDuration = this.props.stepDuration;
+        const stageDuration = this.props.stageDuration;
 
         Animated.timing(backgroundBallSize, {
             toValue: 300,
-            duration: stepDuration[0] * 1000,
+            duration: stageDuration[0] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (stepDuration[1] > 0) {
+            if (stageDuration[1] > 0) {
                 this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(stepDuration[1], this.breathOut);
+                this.holdBreath(stageDuration[1], this.breathOut);
             } else if (event.finished) {
                 this.setState({ frontText: 'Breath Out' });
                 this.breathOut();
@@ -36,7 +36,7 @@ export default class Playing extends Component {
 
     breathOut = () => {
         const {
-            stepDuration,
+            stageDuration,
             onInstructionEnd
         } = this.props;
 
@@ -44,12 +44,12 @@ export default class Playing extends Component {
 
         Animated.timing(backgroundBallSize, {
             toValue: 180,
-            duration: stepDuration[2] * 1000,
+            duration: stageDuration[2] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (stepDuration[3] > 0) {
+            if (stageDuration[3] > 0) {
                 this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(stepDuration[3], onInstructionEnd);
+                this.holdBreath(stageDuration[3], onInstructionEnd);
             } else if (event.finished) {
                 onInstructionEnd();
             }
@@ -103,8 +103,8 @@ export default class Playing extends Component {
     }
 }
 
-PlayingBreathing.propTypes = {
-    stepDuration: PropTypes.array,
+Playing.propTypes = {
+    stageDuration: PropTypes.array,
     onInstructionEnd: PropTypes.function,
 };
 
