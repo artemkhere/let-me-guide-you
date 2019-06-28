@@ -2,31 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 
-import PlayerActionButton from 'PlayerActionButton';
+import PlayerActionButton from './PlayerActionButton';
 
-/*
- * Guides
- */
-import GuideBreathingNormal from 'Guides/Breathing/Normal';
-import GuideBreathingPause from 'Guides/Breathing/Pause';
-import GuideBreathingFinished from 'Guides/Breathing/Finished';
-
-import GuidePowerPoseSuperHuman from 'Guides/PowerPose/SuperHuman';
-import GuidePowerPosePause from 'Guides/PowerPose/Pause';
-import GuidePowerPoseFinished from 'Guides/PowerPose/Finished';
-
-const guides = {
-    Breathing: {
-        Normal: GuideBreathingNormal,
-        Paused: GuideBreathingPause,
-        Finished: GuideBreathingFinished,
-    },
-    PowerPose: {
-        SuperHuman: GuidePowerPoseSuperHuman,
-        Paused: GuidePowerPosePause,
-        Finished: GuidePowerPoseFinished,
-    }
-}
+import Guides from './Guides';
 
 export default class SessionPlayer extends Component {
     constructor(props) {
@@ -34,33 +12,28 @@ export default class SessionPlayer extends Component {
 
         this.session =
             [ // A Session
-                { // Guides
+                { // A Guide
                     guideName: 'Breathing',
-                    instructions: [ // Instructions
-                        { // Descriptor
-                            type: 'Normal'
-                            stageDuration: [4, 2, 4, 0]
+                    instructions: [
+                        { // An Instruction
+                            stageDuration: [4, 2, 4, 0],
                         },
                         {
-                            type: 'Normal'
-                            stageDuration: [4, 2, 4, 0]
+                            stageDuration: [4, 2, 4, 0],
                         },
                         {
-                            type: 'Normal'
-                            stageDuration: [4, 2, 4, 0]
+                            stageDuration: [4, 2, 4, 0],
                         },
                     ]
                 },
 
                 { // Guides
                     guideName: 'PowerPose',
-                    instructions: [ // Instructions
-                        { // Descriptor
-                            type: 'SuperHuman',
+                    instructions: [
+                        { // An Instruction
                             stageDuration: [15],
                         },
                         {
-                            type: 'Star',
                             stageDuration: [20],
                         }
                     ]
@@ -70,9 +43,9 @@ export default class SessionPlayer extends Component {
         this.state = {
             guideState: 'playing', // 'playing', 'paused', 'finished'
             currentGuideIndex: 0,
-            currentInstructionIndex: 0,
             currentGuide: this.session[0].guide,
-            currentInstruction: this.sessionp[0].instructions[0],
+            currentInstructionIndex: 0,
+            currentInstruction: this.session[0].instructions[0],
         };
     }
 
@@ -120,7 +93,11 @@ export default class SessionPlayer extends Component {
 
         switch(guideState) {
             case 'playing':
-                this.setState({ guideState: 'paused' });
+                this.setState({
+                    guideState: 'paused',
+                    currentInstructionIndex: 0,
+                    currentInstruction: this.session[0].instructions[0],
+                });
                 break;
             case 'paused':
                 this.setState({ guideState: 'playing' });
@@ -136,26 +113,25 @@ export default class SessionPlayer extends Component {
             currentGuide,
             currentInstruction,
             guideState,
-        } = this.state.currentGuide;
+        } = this.state;
+
+        let DisplayedInstruction;
 
         switch (guideState) {
             case 'playing':
-                const CurrentGuide =
-                    guides[currentGuide.guideName][currentInstruction.type];
+                DisplayedInstruction = Guides[currentGuide.guideName].Playing;
                 break;
             case 'paused':
-                const CurrentGuide =
-                    guides[currentGuide.guideName].Paused;
+                DisplayedInstruction = Guides.Global.Paused;
             case 'finished':
-                const CurrentGuide =
-                    guides[currentGuide.guideName].Finished;
+                DisplayedInstruction = Guides[currentGuide.guideName].Finished;
         }
 
         return (
             <View style={styles.container}>
                 <View style={styles.sceneProcessor}>
                     <View style={styles.scenePlayground}>
-                        <CurrentGuide
+                        <DisplayedInstruction
                             onInstructionEnd={this.onInstructionEndHandler}
                             stageDuration={currentInstruction.stageDuration}
                         />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
 
-export default class PausedBreathing extends Component {
+export default class Paused extends Component {
     constructor(props) {
         super(props);
 
@@ -64,3 +64,4 @@ const styles = StyleSheet.create({
         color: '#333',
     },
 });
+

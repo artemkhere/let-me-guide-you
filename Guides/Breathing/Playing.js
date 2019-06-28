@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
 
-export default class PlayingBreathing extends Component {
+export default class Playing extends Component {
     constructor(props) {
         super(props);
 

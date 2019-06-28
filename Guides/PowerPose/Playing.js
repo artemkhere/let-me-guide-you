@@ -5,7 +5,7 @@ import ProgressCircle from 'react-native-progress-circle';
 
 import PowerPoseImage from './images/powerPoseImage';
 
-export default class SuperHumanPowerPose extends Component {
+export default class Playing extends Component {
     constructor(props) {
         super(props);
 
