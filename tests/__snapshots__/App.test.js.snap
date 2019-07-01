@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App test against snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ecf0f1",
+        "flex": 1,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "height": "100%",
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ecf0f1",
+            "flex": 1,
+            "width": "100%",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "greenyellow",
+              "borderRadius": 300,
+              "display": "flex",
+              "height": 100,
+              "justifyContent": "center",
+              "width": 100,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#333",
+                "fontSize": 24,
+              }
+            }
+          >
+            Breath In
+          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "tomato",
+                "borderRadius": 120,
+                "display": "flex",
+                "height": 120,
+                "justifyContent": "center",
+                "opacity": 0,
+                "width": 120,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#201633",
+            "display": "flex",
+            "height": 80,
+            "paddingBottom": 16,
+            "width": "100%",
+          }
+        }
+      >
+        <View>
+          <Text />
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
