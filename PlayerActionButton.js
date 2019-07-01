@@ -42,6 +42,6 @@ export default class PlayerActionButton extends Component {
 }
 
 PlayerActionButton.propTypes = {
-    onPress: PropTypes.function,
+    onPress: PropTypes.func,
     guideState: PropTypes.string,
 };

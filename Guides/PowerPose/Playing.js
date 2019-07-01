@@ -83,7 +83,7 @@ export default class Playing extends Component {
 
 Playing.propTypes = {
     stageDuration: PropTypes.array,
-    onInstructionEnd: PropTypes.function,
+    onInstructionEnd: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
