@@ -50,22 +50,22 @@ export default class SessionPlayer extends Component {
     }
 
     onInstructionEndHandler = () => {
-        incrementInstructionOrGuide();
+        this.incrementInstructionOrGuide();
     }
 
     incrementInstructionOrGuide = () => {
-        const nextInstruction =
-            this.session[currentGuideIndex]
-                .instructions[currentInstructionIndex + 1];
-
-        const nextGuide = this.session[currentGuideIndex + 1];
-
         const {
             currentInstructionIndex,
             currentGuideIndex,
             currentGuide,
             currentInstruction
         } = this.state;
+
+        const nextInstruction =
+            this.session[currentGuideIndex]
+                .instructions[currentInstructionIndex + 1];
+
+        const nextGuide = this.session[currentGuideIndex + 1];
 
         if (typeof nextInstruction !== 'undefined') {
             const nextInstructionIndex = currentInstructionIndex + 1;
@@ -111,7 +111,9 @@ export default class SessionPlayer extends Component {
     render() {
         const {
             currentGuide,
+            currentGuideIndex,
             currentInstruction,
+            currentInstructionIndex,
             guideState,
         } = this.state;
 
@@ -131,7 +133,7 @@ export default class SessionPlayer extends Component {
             <View style={styles.container}>
                 <View style={styles.sceneProcessor}>
                     <View style={styles.scenePlayground}>
-                        <DisplayedInstruction
+                        <DisplayedInstruction key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
                             onInstructionEnd={this.onInstructionEndHandler}
                             stageDuration={currentInstruction.stageDuration}
                         />
