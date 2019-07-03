@@ -5,7 +5,7 @@ import ProgressCircle from 'react-native-progress-circle';
 
 import PowerPoseImage from './images/powerPoseImage';
 
-export default class PlayingBreathing extends Component {
+export default class Playing extends Component {
     constructor(props) {
         super(props);
 
@@ -32,19 +32,19 @@ export default class PlayingBreathing extends Component {
 
     startProgressAnimation = () => {
         const {
-            sceneScenario,
-            handleSceneEnd,
+            stageDuration,
+            onInstructionEnd,
         } = this.props;
 
         const progressCircleCompletion = this.state.progressCircleCompletion;
 
         Animated.timing(progressCircleCompletion, {
             toValue: 100,
-            duration: sceneScenario[0] * 1000
+            duration: stageDuration[0] * 1000
         }).start((event) => {
             if (event.finished) {
                 Vibration.vibrate(500);
-                handleSceneEnd();
+                onInstructionEnd();
             }
         });
 
@@ -81,9 +81,9 @@ export default class PlayingBreathing extends Component {
     }
 }
 
-PlayingBreathing.propTypes = {
-    sceneScenario: PropTypes.array,
-    handleSceneEnd: PropTypes.function,
+Playing.propTypes = {
+    stageDuration: PropTypes.array,
+    onInstructionEnd: PropTypes.func,
 };
 
 const styles = StyleSheet.create({

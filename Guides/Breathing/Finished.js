@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
 
-export default class PausedBreathing extends Component {
+export default class Finished extends Component {
     constructor(props) {
         super(props);
 
@@ -34,17 +34,15 @@ export default class PausedBreathing extends Component {
         const backgroundBallSize = this.state.backgroundBallSize;
 
         return (
-            <View>
-                <Animated.View style={[
-                    styles.backgroundBall,
-                    {
-                        width: backgroundBallSize,
-                        height: backgroundBallSize,
-                    },
-                ]}>
-                    <Text style={styles.frontText}>Paused</Text>
-                </Animated.View>
-            </View>
+            <Animated.View style={[
+                styles.backgroundBall,
+                {
+                    width: backgroundBallSize,
+                    height: backgroundBallSize,
+                },
+            ]}>
+                <Text style={styles.frontText}>All Done</Text>
+            </Animated.View>
         );
     }
 }

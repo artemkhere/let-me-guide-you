@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
-export default class PausedPowerPose extends Component {
+export default class Finished extends Component {
     render() {
         return (
             <View>
-                <Text>Paused</Text>
+                <Text>All Done</Text>
             </View>
         );
     }

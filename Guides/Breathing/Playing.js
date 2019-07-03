@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
 
-export default class PlayingBreathing extends Component {
+export default class Playing extends Component {
     constructor(props) {
         super(props);
 
@@ -17,16 +17,16 @@ export default class PlayingBreathing extends Component {
 
     breathIn = () => {
         const backgroundBallSize = this.state.backgroundBallSize;
-        const sceneScenario = this.props.sceneScenario;
+        const stageDuration = this.props.stageDuration;
 
         Animated.timing(backgroundBallSize, {
             toValue: 300,
-            duration: sceneScenario[0] * 1000,
+            duration: stageDuration[0] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (sceneScenario[1] > 0) {
+            if (stageDuration[1] > 0) {
                 this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(sceneScenario[1], this.breathOut);
+                this.holdBreath(stageDuration[1], this.breathOut);
             } else if (event.finished) {
                 this.setState({ frontText: 'Breath Out' });
                 this.breathOut();
@@ -36,22 +36,22 @@ export default class PlayingBreathing extends Component {
 
     breathOut = () => {
         const {
-            sceneScenario,
-            handleSceneEnd
+            stageDuration,
+            onInstructionEnd
         } = this.props;
 
         const backgroundBallSize = this.state.backgroundBallSize;
 
         Animated.timing(backgroundBallSize, {
             toValue: 180,
-            duration: sceneScenario[2] * 1000,
+            duration: stageDuration[2] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (sceneScenario[3] > 0) {
+            if (stageDuration[3] > 0) {
                 this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(sceneScenario[3], handleSceneEnd);
+                this.holdBreath(stageDuration[3], onInstructionEnd);
             } else if (event.finished) {
-                handleSceneEnd();
+                onInstructionEnd();
             }
         })
     }
@@ -103,9 +103,9 @@ export default class PlayingBreathing extends Component {
     }
 }
 
-PlayingBreathing.propTypes = {
-    sceneScenario: PropTypes.array,
-    handleSceneEnd: PropTypes.function,
+Playing.propTypes = {
+    stageDuration: PropTypes.array,
+    onInstructionEnd: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
