@@ -13,28 +13,46 @@ export default class SessionPlayer extends Component {
         this.session =
             [ // A Session
                 { // A Guide
-                    guideName: 'Breathing',
+                    guideName: 'RepeatWords',
                     instructions: [
                         { // An Instruction
-                            stageDuration: [4, 2, 4, 0],
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
                         },
-                        {
-                            stageDuration: [4, 2, 4, 0],
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
                         },
-                        {
-                            stageDuration: [4, 2, 4, 0],
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
                         },
                     ]
                 },
 
-                { // Guides
+                { // A Guide
+                    guideName: 'Breathing',
+                    instructions: [
+                        { // An Instruction
+                            duration: [4, 2, 4, 0],
+                        },
+                        {
+                            duration: [4, 2, 4, 0],
+                        },
+                        {
+                            duration: [4, 2, 4, 0],
+                        },
+                    ]
+                },
+
+                { // Guide
                     guideName: 'PowerPose',
                     instructions: [
                         { // An Instruction
-                            stageDuration: [15],
+                            duration: [15],
                         },
                         {
-                            stageDuration: [20],
+                            duration: [20],
                         }
                     ]
                 }
@@ -133,9 +151,11 @@ export default class SessionPlayer extends Component {
             <View style={styles.container}>
                 <View style={styles.sceneProcessor}>
                     <View style={styles.scenePlayground}>
-                        <DisplayedInstruction key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
+                        <DisplayedInstruction
+                            key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
                             onInstructionEnd={this.onInstructionEndHandler}
-                            stageDuration={currentInstruction.stageDuration}
+                            duration={currentInstruction.duration}
+                            instructionsText={currentInstruction.instructionsText}
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>

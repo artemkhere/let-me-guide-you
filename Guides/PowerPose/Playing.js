@@ -32,7 +32,7 @@ export default class Playing extends Component {
 
     startProgressAnimation = () => {
         const {
-            stageDuration,
+            duration,
             onInstructionEnd,
         } = this.props;
 
@@ -40,7 +40,7 @@ export default class Playing extends Component {
 
         Animated.timing(progressCircleCompletion, {
             toValue: 100,
-            duration: stageDuration[0] * 1000
+            duration: duration[0] * 1000
         }).start((event) => {
             if (event.finished) {
                 Vibration.vibrate(500);
@@ -82,7 +82,7 @@ export default class Playing extends Component {
 }
 
 Playing.propTypes = {
-    stageDuration: PropTypes.array,
+    duration: PropTypes.array,
     onInstructionEnd: PropTypes.func,
 };
 
@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        backgroundColor: '#201633',
     },
     instructionsContainer: {
         width: '100%',
