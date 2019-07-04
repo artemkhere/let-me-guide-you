@@ -13,6 +13,24 @@ export default class SessionPlayer extends Component {
         this.session =
             [ // A Session
                 { // A Guide
+                    guideName: 'RepeatWords',
+                    instructions: [
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
+                        },
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
+                        },
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
+                        },
+                    ]
+                },
+
+                { // A Guide
                     guideName: 'Breathing',
                     instructions: [
                         { // An Instruction
@@ -27,7 +45,7 @@ export default class SessionPlayer extends Component {
                     ]
                 },
 
-                { // Guides
+                { // Guide
                     guideName: 'PowerPose',
                     instructions: [
                         { // An Instruction
@@ -133,9 +151,11 @@ export default class SessionPlayer extends Component {
             <View style={styles.container}>
                 <View style={styles.sceneProcessor}>
                     <View style={styles.scenePlayground}>
-                        <DisplayedInstruction key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
+                        <DisplayedInstruction
+                            key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
                             onInstructionEnd={this.onInstructionEndHandler}
                             duration={currentInstruction.duration}
+                            instructionsText={currentInstruction.instructionsText}
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>

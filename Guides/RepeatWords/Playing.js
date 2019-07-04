@@ -7,64 +7,48 @@ export default class Playing extends Component {
         super(props);
 
         this.state = {
-            progressCircleCompletion: new Animated.Value(0),
-            progressCircleCompletionValue: 0,
+            wordsOpacity: new Animated.Value(0),
             progressValueListener: null,
             progressCircleAnimationProcess: null,
         }
     }
 
-    componentDidMount() { this.startProgressAnimation(); }
+    componentDidMount() { this.startInstructionsTextAnimation(); }
 
-    componentWillUnmount() {
-        const {
-            progressCircleCompletion,
-            progressValueListener,
-            progressCircleAnimationProcess,
-        } = this.state;
+    componentWillUnmount() { Animated.timing(this.state.wordsOpacity).stop(); }
 
-        progressCircleCompletion.removeListener(progressValueListener);
-        Animated.timing(progressCircleCompletion).stop();
-    }
-
-    startProgressAnimation = () => {
+    startInstructionsTextAnimation = () => {
         const {
             duration,
             onInstructionEnd,
         } = this.props;
 
-        const progressCircleCompletion = this.state.progressCircleCompletion;
+        const wordsOpacity = this.state.wordsOpacity;
 
-        Animated.timing(progressCircleCompletion, {
-            toValue: 100,
-            duration: duration[0] * 1000
-        }).start((event) => {
-            if (event.finished) {
-                Vibration.vibrate(500);
-                onInstructionEnd();
-            }
+        Animated.sequence([
+            Animated.timing(wordsOpacity, {
+                toValue: 1,
+                duration: 1000
+            }),
+            Animated.delay(duration[0] * 1000),
+            Animated.timing(wordsOpacity, {
+                toValue: 0,
+                duration: 1000
+            })
+        ]).start((event) => {
+            if (event.finished) { onInstructionEnd(); }
         });
-
-        const progressValueListener = progressCircleCompletion.addListener(({ value }) => {
-            this.setState({ progressCircleCompletionValue: value });
-        });
-
-        this.setState({ progressValueListener });
     }
 
     render() {
-        const {
-            progressCircleCompletion,
-            progressCircleCompletionValue
-        } = this.state;
-
         return (
             <View style={styles.sceneArrangment}>
                 <Text style={styles.instructionsText}>Say This</Text>
                 <Text style={styles.instructionsText}>(outloud if you can)</Text>
-                <View style={styles.instructionsContainer}>
-                    <Text style={styles.instructionsText}>Hold a Power Pose</Text>
-                </View>
+                <Animated.Text
+                    style={[styles.instructionsText, { opacity: this.state.wordsOpacity }]}>
+                        {this.props.instructionsText}
+                </Animated.Text>
             </View>
         );
     }
@@ -73,6 +57,7 @@ export default class Playing extends Component {
 Playing.propTypes = {
     duration: PropTypes.array,
     onInstructionEnd: PropTypes.func,
+    instructionsText: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -83,6 +68,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        backgroundColor: '#201633',
     },
     instructionsContainer: {
         width: '100%',

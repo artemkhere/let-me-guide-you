@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        backgroundColor: '#201633',
     },
     instructionsContainer: {
         width: '100%',
