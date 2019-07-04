@@ -5,7 +5,7 @@ export default class Finished extends Component {
     render() {
         return (
             <View>
-                <Text>All Done</Text>
+                <Text>Finished Power Pose!</Text>
             </View>
         );
     }

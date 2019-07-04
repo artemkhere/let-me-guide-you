@@ -41,7 +41,7 @@ export default class Finished extends Component {
                     height: backgroundBallSize,
                 },
             ]}>
-                <Text style={styles.frontText}>All Done</Text>
+                <Text style={styles.frontText}>Finished breathing!</Text>
             </Animated.View>
         );
     }
