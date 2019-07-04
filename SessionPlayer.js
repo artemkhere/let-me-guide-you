@@ -16,13 +16,13 @@ export default class SessionPlayer extends Component {
                     guideName: 'Breathing',
                     instructions: [
                         { // An Instruction
-                            stageDuration: [4, 2, 4, 0],
+                            duration: [4, 2, 4, 0],
                         },
                         {
-                            stageDuration: [4, 2, 4, 0],
+                            duration: [4, 2, 4, 0],
                         },
                         {
-                            stageDuration: [4, 2, 4, 0],
+                            duration: [4, 2, 4, 0],
                         },
                     ]
                 },
@@ -31,10 +31,10 @@ export default class SessionPlayer extends Component {
                     guideName: 'PowerPose',
                     instructions: [
                         { // An Instruction
-                            stageDuration: [15],
+                            duration: [15],
                         },
                         {
-                            stageDuration: [20],
+                            duration: [20],
                         }
                     ]
                 }
@@ -135,7 +135,7 @@ export default class SessionPlayer extends Component {
                     <View style={styles.scenePlayground}>
                         <DisplayedInstruction key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
                             onInstructionEnd={this.onInstructionEndHandler}
-                            stageDuration={currentInstruction.stageDuration}
+                            duration={currentInstruction.duration}
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>

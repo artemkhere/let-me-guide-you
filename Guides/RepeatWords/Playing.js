@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Text, Image, View, Vibration, StyleSheet } from 'react-native';
-import ProgressCircle from 'react-native-progress-circle';
-
-import PowerPoseImage from './images/powerPoseImage';
+import { Animated, Text, Image, View, StyleSheet } from 'react-native';
 
 export default class Playing extends Component {
     constructor(props) {
@@ -63,16 +60,8 @@ export default class Playing extends Component {
 
         return (
             <View style={styles.sceneArrangment}>
-                <ProgressCircle
-                    percent={progressCircleCompletionValue}
-                    radius={120}
-                    borderWidth={8}
-                    color="#B38C97"
-                    shadowColor="#382943"
-                    bgColor="#201633"
-                >
-                    <PowerPoseImage />
-                </ProgressCircle>
+                <Text style={styles.instructionsText}>Say This</Text>
+                <Text style={styles.instructionsText}>(outloud if you can)</Text>
                 <View style={styles.instructionsContainer}>
                     <Text style={styles.instructionsText}>Hold a Power Pose</Text>
                 </View>
