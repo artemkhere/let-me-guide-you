@@ -1,0 +1,4 @@
+{
+  "name": "SessionPlayer",
+  "main": "./SessionPlayer.js"
+}

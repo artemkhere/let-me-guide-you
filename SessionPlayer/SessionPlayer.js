@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 
 import PlayerActionButton from './PlayerActionButton';
 
-import Guides from './Guides';
+import Guides from '../Guides';
 
 export default class SessionPlayer extends Component {
     constructor(props) {
@@ -143,23 +143,24 @@ export default class SessionPlayer extends Component {
                 break;
             case 'paused':
                 DisplayedInstruction = Guides.Global.Paused;
+                break;
             case 'finished':
                 DisplayedInstruction = Guides[currentGuide.guideName].Finished;
+                break;
         }
 
         return (
             <View style={styles.container}>
                 <View style={styles.sceneProcessor}>
                     <View style={styles.scenePlayground}>
-                        <DisplayedInstruction
-                            key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
+                        <DisplayedInstruction key={currentGuideIndex.toString() + currentInstructionIndex.toString() + this.state.guideState}
                             onInstructionEnd={this.onInstructionEndHandler}
                             duration={currentInstruction.duration}
                             instructionsText={currentInstruction.instructionsText}
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>
-                        <PlayerActionButton
+                        <PlayerActionButton key={this.state.guideState}
                             onPress={this.actionButtonHandler}
                             guideState={this.state.guideState}
                         />
