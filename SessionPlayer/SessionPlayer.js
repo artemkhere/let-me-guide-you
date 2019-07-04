@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SafeAreaView, View, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import PlayerActionButton from './PlayerActionButton';
 import HUD from './HUD';
@@ -98,8 +99,6 @@ export default class SessionPlayer extends Component {
             typeof nextGuide !== 'undefined'
             && guideState === 'playing'
         ) {
-            const nextGuideIndex = currentGuideIndex + 1;
-
             this.setState({
                 guideState: 'finished',
             });
@@ -121,6 +120,42 @@ export default class SessionPlayer extends Component {
                 guideState: 'all_finished',
             });
             console.log('All guides have been completed');
+        }
+    }
+
+    decrementGuide = () => {
+        const { currentGuideIndex } = this.state;
+        const previousGuideIndex = currentGuideIndex - 1;
+
+        if (0 <= previousGuideIndex) {
+            const previousGuide = this.session[previousGuideIndex];
+
+            this.setState({
+                guideState: 'playing',
+                currentInstructionIndex: 0,
+                currentInstruction: previousGuide.instructions[0],
+                currentGuideIndex: previousGuideIndex,
+                currentGuide: previousGuide,
+            });
+        }
+    }
+
+    incrementGuide = () => {
+        const { currentGuideIndex } = this.state;
+        const nextGuide = this.session[currentGuideIndex + 1];
+
+        if (
+            typeof nextGuide !== 'undefined'
+        ) {
+            const nextGuideIndex = currentGuideIndex + 1;
+
+            this.setState({
+                guideState: 'playing',
+                currentInstructionIndex: 0,
+                currentInstruction: nextGuide.instructions[0],
+                currentGuideIndex: nextGuideIndex,
+                currentGuide: nextGuide,
+            });
         }
     }
 
@@ -196,10 +231,22 @@ export default class SessionPlayer extends Component {
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>
+                        <Icon
+                            name="ios-arrow-dropleft"
+                            color="#FFD1D5"
+                            size={48}
+                            onPress={this.decrementGuide}
+                        />
                         <PlayerActionButton
                             key={this.state.guideState}
                             onPress={this.actionButtonHandler}
                             guideState={this.state.guideState}
+                        />
+                        <Icon
+                            name="ios-arrow-dropright"
+                            color="#FFD1D5"
+                            size={48}
+                            onPress={this.incrementGuide}
                         />
                     </View>
                 </View>

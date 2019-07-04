@@ -18,7 +18,7 @@ export default class HUD extends Component {
         }, 1000);
     }
 
-    componentWillUmount() {
+    componentWillUnmount() {
         clearInterval(this.timerIntervalID);
     }
 
