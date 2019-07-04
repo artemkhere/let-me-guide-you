@@ -17,6 +17,9 @@ export default class PlayerActionButton extends Component {
                 iconName = 'ios-play';
                 break;
             case 'finished':
+                iconName = 'ios-checkmark-circle-outline';
+                break;
+            case 'all_finished':
                 iconName = 'ios-checkmark-circle';
                 break;
             default:

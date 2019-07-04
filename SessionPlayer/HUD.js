@@ -11,7 +11,7 @@ export default class HUD extends Component {
             timer: 0,
         };
 
-        this.timer = setInterval(() => {
+        this.timerIntervalID = setInterval(() => {
             this.setState({
                 timer: this.state.timer + 1
             });
@@ -19,8 +19,18 @@ export default class HUD extends Component {
     }
 
     componentWillUmount() {
-        console.log("Unmounting: ", this.timer)
-        clearInterval(this.timer);
+        clearInterval(this.timerIntervalID);
+    }
+
+    componentDidUpdate() {
+        const { guideState } = this.props;
+
+        if (
+            this.timerIntervalID
+            && (guideState === 'finished' || guideState === 'all_finished')
+        ) {
+            clearInterval(this.timerIntervalID);
+        }
     }
 
     render() {
@@ -48,6 +58,8 @@ export default class HUD extends Component {
 HUD.propTypes = {
     currentGuideNumber: PropTypes.number.isRequired,
     totalGuides: PropTypes.number.isRequired,
+    guideName: PropTypes.string.isRequired,
+    guideState: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

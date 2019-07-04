@@ -182,6 +182,7 @@ export default class SessionPlayer extends Component {
                         <HUD
                             key={currentGuideIndex.toString()}
                             guideName={currentGuide.guideName}
+                            guideState={guideState}
                             totalGuides={totalGuides}
                             currentGuideNumber={currentGuideIndex + 1}
                         />
