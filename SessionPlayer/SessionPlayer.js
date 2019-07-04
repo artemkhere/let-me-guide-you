@@ -187,15 +187,18 @@ export default class SessionPlayer extends Component {
 
         switch (guideState) {
             case 'playing':
-                return DisplayedInstruction = Guides[currentGuide.guideName].Playing;
+                return DisplayedInstruction =
+                    Guides[currentGuide.guideName].Playing;
             case 'paused':
-                return DisplayedInstruction = Guides.Global.Paused;
+                return DisplayedInstruction =
+                    Guides.Global.Paused;
             case 'finished':
-                return DisplayedInstruction = Guides[currentGuide.guideName].Finished;
+                return DisplayedInstruction =
+                    Guides[currentGuide.guideName].Finished;
             case 'all_finished':
-                return DisplayedInstruction = Guides.Global.AllFinished;
+                return DisplayedInstruction =
+                    Guides.Global.AllFinished;
         }
-
     }
 
     render() {
@@ -208,7 +211,7 @@ export default class SessionPlayer extends Component {
         } = this.state;
 
         const DisplayedInstruction = this.determineDisplayedInstruction();
-        const totalGuides = Object.keys(Guides).length - 1; // -1 to remove "Global" key.
+        const totalGuides = Object.keys(Guides).length - 1; // -1 to remove "Global" key
 
         return (
             <SafeAreaView style={styles.container}>
@@ -224,7 +227,11 @@ export default class SessionPlayer extends Component {
                     </View>
                     <View style={styles.displayedInstruction}>
                         <DisplayedInstruction
-                            key={currentGuideIndex.toString() + currentInstructionIndex.toString() + this.state.guideState}
+                            key={
+                                currentGuideIndex.toString()
+                                + currentInstructionIndex.toString()
+                                + this.state.guideState
+                            }
                             onInstructionEnd={this.onInstructionEndHandler}
                             duration={currentInstruction.duration}
                             instructionsText={currentInstruction.instructionsText}
