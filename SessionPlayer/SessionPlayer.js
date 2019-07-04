@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { SafeAreaView, View, StyleSheet } from 'react-native';
 
 import PlayerActionButton from './PlayerActionButton';
+import HUD from './HUD';
 
 import Guides from '../Guides';
 
@@ -150,23 +151,33 @@ export default class SessionPlayer extends Component {
         }
 
         return (
-            <View style={styles.container}>
-                <View style={styles.sceneProcessor}>
-                    <View style={styles.scenePlayground}>
-                        <DisplayedInstruction key={currentGuideIndex.toString() + currentInstructionIndex.toString() + this.state.guideState}
+            <SafeAreaView style={styles.container}>
+                <View style={styles.sessionPlayer}>
+                    <View style={styles.HUDContainer}>
+                        <HUD
+                            key={currentGuideIndex.toString()}
+                            guideName={currentGuide.guideName}
+                            totalSteps={currentGuide.instructions.length}
+                            currentStep={currentInstructionIndex + 1}
+                        />
+                    </View>
+                    <View style={styles.displayedInstruction}>
+                        <DisplayedInstruction
+                            key={currentGuideIndex.toString() + currentInstructionIndex.toString() + this.state.guideState}
                             onInstructionEnd={this.onInstructionEndHandler}
                             duration={currentInstruction.duration}
                             instructionsText={currentInstruction.instructionsText}
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>
-                        <PlayerActionButton key={this.state.guideState}
+                        <PlayerActionButton
+                            key={this.state.guideState}
                             onPress={this.actionButtonHandler}
                             guideState={this.state.guideState}
                         />
                     </View>
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }
@@ -174,24 +185,25 @@ export default class SessionPlayer extends Component {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        flex: 1,
-        backgroundColor: '#ecf0f1',
+        display: 'flex',
+        backgroundColor: '#201533',
     },
-    sceneProcessor: {
+    HUDContainer: {
+        width: '100%',
+        flexDirection: 'row',
+    },
+    sessionPlayer: {
         width: '100%',
         height: '100%',
     },
-    scenePlayground: {
+    displayedInstruction: {
         width: '100%',
-        flex: 1,
-        backgroundColor: '#ecf0f1',
     },
     actionButtonContainer: {
         width: '100%',
         height: 80,
         paddingBottom: 16,
-        display: 'flex',
         alignItems: 'center',
-        backgroundColor: '#201633',
+        justifyContent: 'space-between',
     },
 });
