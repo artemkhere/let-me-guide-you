@@ -37,6 +37,9 @@ export default class HUD extends Component {
         const { currentGuideNumber, totalGuides, guideName } = this.props;
         const { timer } = this.state;
 
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+
         return (
             <View style={styles.container}>
                 <Text style={styles.guideName}>
@@ -47,7 +50,7 @@ export default class HUD extends Component {
                         Guide {currentGuideNumber} / {totalGuides}
                     </Text>
                     <Text style={styles.text}>
-                        {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' : ''}{timer % 60}
+                        {minutes}:{seconds < 10 ? '0' : ''}{seconds}
                     </Text>
                 </View>
             </View>
