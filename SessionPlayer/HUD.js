@@ -24,7 +24,7 @@ export default class HUD extends Component {
     }
 
     render() {
-        const { currentStep, totalSteps, guideName } = this.props;
+        const { currentGuideNumber, totalGuides, guideName } = this.props;
         const { timer } = this.state;
 
         return (
@@ -34,7 +34,7 @@ export default class HUD extends Component {
                 </Text>
                 <View style={styles.smallTextContainer}>
                     <Text style={styles.text}>
-                        Step {currentStep} / {totalSteps}
+                        Guide {currentGuideNumber} / {totalGuides}
                     </Text>
                     <Text style={styles.text}>
                         {Math.floor(timer / 60)}:{timer % 60 < 10 ? '0' : ''}{timer % 60}
@@ -46,8 +46,8 @@ export default class HUD extends Component {
 }
 
 HUD.propTypes = {
-    totalSteps: PropTypes.number.isRequired,
-    currentStep: PropTypes.number.isRequired,
+    currentGuideNumber: PropTypes.number.isRequired,
+    totalGuides: PropTypes.number.isRequired,
 };
 
 const styles = StyleSheet.create({

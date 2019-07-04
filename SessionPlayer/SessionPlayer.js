@@ -60,7 +60,7 @@ export default class SessionPlayer extends Component {
             ];
 
         this.state = {
-            guideState: 'playing', // 'playing', 'paused', 'finished'
+            guideState: 'playing', // 'playing', 'paused', 'finished', 'all_finished'
             currentGuideIndex: 0,
             currentGuide: this.session[0],
             currentInstructionIndex: 0,
@@ -77,7 +77,8 @@ export default class SessionPlayer extends Component {
             currentInstructionIndex,
             currentGuideIndex,
             currentGuide,
-            currentInstruction
+            currentInstruction,
+            guideState,
         } = this.state;
 
         const nextInstruction =
@@ -93,16 +94,32 @@ export default class SessionPlayer extends Component {
                 currentInstructionIndex: nextInstructionIndex,
                 currentInstruction: currentGuide.instructions[nextInstructionIndex],
             });
-        } else if (typeof nextGuide !== 'undefined') {
+        } else if (
+            typeof nextGuide !== 'undefined'
+            && guideState === 'playing'
+        ) {
             const nextGuideIndex = currentGuideIndex + 1;
 
             this.setState({
+                guideState: 'finished',
+            });
+        } else if (
+            typeof nextGuide !== 'undefined'
+            && guideState === 'finished'
+        ) {
+            const nextGuideIndex = currentGuideIndex + 1;
+
+            this.setState({
+                guideState: 'playing',
                 currentInstructionIndex: 0,
                 currentInstruction: nextGuide.instructions[0],
                 currentGuideIndex: nextGuideIndex,
                 currentGuide: nextGuide,
             });
         } else {
+            this.setState({
+                guideState: 'all_finished',
+            });
             console.log('All guides have been completed');
         }
     }
@@ -122,9 +139,28 @@ export default class SessionPlayer extends Component {
                 this.setState({ guideState: 'playing' });
                 break;
             case 'finished':
-                incrementInstructionOrGuide();
+                this.incrementInstructionOrGuide();
                 break;
         }
+    }
+
+    determineDisplayedInstruction = () => {
+        const {
+            guideState,
+            currentGuide
+        } = this.state;
+
+        switch (guideState) {
+            case 'playing':
+                return DisplayedInstruction = Guides[currentGuide.guideName].Playing;
+            case 'paused':
+                return DisplayedInstruction = Guides.Global.Paused;
+            case 'finished':
+                return DisplayedInstruction = Guides[currentGuide.guideName].Finished;
+            case 'all_finished':
+                return DisplayedInstruction = Guides.Global.AllFinished;
+        }
+
     }
 
     render() {
@@ -136,19 +172,8 @@ export default class SessionPlayer extends Component {
             guideState,
         } = this.state;
 
-        let DisplayedInstruction;
-
-        switch (guideState) {
-            case 'playing':
-                DisplayedInstruction = Guides[currentGuide.guideName].Playing;
-                break;
-            case 'paused':
-                DisplayedInstruction = Guides.Global.Paused;
-                break;
-            case 'finished':
-                DisplayedInstruction = Guides[currentGuide.guideName].Finished;
-                break;
-        }
+        const DisplayedInstruction = this.determineDisplayedInstruction();
+        const totalGuides = Object.keys(Guides).length - 1; // -1 to remove "Global" key.
 
         return (
             <SafeAreaView style={styles.container}>
@@ -157,8 +182,8 @@ export default class SessionPlayer extends Component {
                         <HUD
                             key={currentGuideIndex.toString()}
                             guideName={currentGuide.guideName}
-                            totalSteps={currentGuide.instructions.length}
-                            currentStep={currentInstructionIndex + 1}
+                            totalGuides={totalGuides}
+                            currentGuideNumber={currentGuideIndex + 1}
                         />
                     </View>
                     <View style={styles.displayedInstruction}>
@@ -188,13 +213,14 @@ const styles = StyleSheet.create({
         display: 'flex',
         backgroundColor: '#201533',
     },
-    HUDContainer: {
-        width: '100%',
-        flexDirection: 'row',
-    },
     sessionPlayer: {
         width: '100%',
         height: '100%',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+    },
+    HUDContainer: {
+        width: '100%',
     },
     displayedInstruction: {
         width: '100%',
@@ -204,6 +230,7 @@ const styles = StyleSheet.create({
         height: 80,
         paddingBottom: 16,
         alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'space-between',
     },
 });
