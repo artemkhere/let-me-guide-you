@@ -61,7 +61,7 @@ export default class SessionPlayer extends Component {
             ];
 
         this.state = {
-            guideState: 'playing', // 'playing', 'paused', 'finished', 'all_finished'
+            guideState: 'playing', // 'playing', 'paused', 'finished', 'session_finished'
             currentGuideIndex: 0,
             currentGuide: this.session[0],
             currentInstructionIndex: 0,
@@ -117,7 +117,7 @@ export default class SessionPlayer extends Component {
             });
         } else {
             this.setState({
-                guideState: 'all_finished',
+                guideState: 'session_finished',
             });
             console.log('All guides have been completed');
         }
@@ -195,10 +195,29 @@ export default class SessionPlayer extends Component {
             case 'finished':
                 return DisplayedInstruction =
                     Guides[currentGuide.guideName].Finished;
-            case 'all_finished':
+            case 'session_finished':
                 return DisplayedInstruction =
-                    Guides.Global.AllFinished;
+                    Guides.Global.SessionFinished;
         }
+    }
+
+    navigateGuideButton = (iconName, onPressHandler) => {
+        return (
+            <Icon
+                name={iconName}
+                color="#FFD1D5"
+                size={48}
+                onPress={onPressHandler}
+            />
+        );
+    }
+
+    decrementGuideButton = () => {
+        return this.navigateGuideButton('ios-arrow-dropleft', this.decrementGuide);
+    }
+
+    incrementGuideButton = () => {
+        return this.navigateGuideButton('ios-arrow-dropright', this.incrementGuide);
     }
 
     render() {
@@ -238,23 +257,13 @@ export default class SessionPlayer extends Component {
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>
-                        <Icon
-                            name="ios-arrow-dropleft"
-                            color="#FFD1D5"
-                            size={48}
-                            onPress={this.decrementGuide}
-                        />
+                        {this.decrementGuideButton()}
                         <PlayerActionButton
                             key={this.state.guideState}
                             onPress={this.actionButtonHandler}
                             guideState={this.state.guideState}
                         />
-                        <Icon
-                            name="ios-arrow-dropright"
-                            color="#FFD1D5"
-                            size={48}
-                            onPress={this.incrementGuide}
-                        />
+                        {this.incrementGuideButton()}
                     </View>
                 </View>
             </SafeAreaView>

@@ -27,18 +27,37 @@ export default class HUD extends Component {
 
         if (
             this.timerIntervalID
-            && (guideState === 'finished' || guideState === 'all_finished')
+            && (guideState === 'finished' || guideState === 'session_finished')
         ) {
             clearInterval(this.timerIntervalID);
         }
     }
 
-    render() {
-        const { currentGuideNumber, totalGuides, guideName } = this.props;
+    renderGuideNumber = () => {
+        const { currentGuideNumber, totalGuides } = this.props;
+
+        return (
+            <Text style={styles.text}>
+                Guide {currentGuideNumber} / {totalGuides}
+            </Text>
+        );
+    }
+
+    renderGuideTimer = () => {
         const { timer } = this.state;
 
         const minutes = Math.floor(timer / 60);
         const seconds = timer % 60;
+
+        return (
+            <Text style={styles.text}>
+                {minutes}:{seconds < 10 ? '0' : ''}{seconds}
+            </Text>
+        );
+    }
+
+    render() {
+        const { guideName } = this.props;
 
         return (
             <View style={styles.container}>
@@ -46,12 +65,8 @@ export default class HUD extends Component {
                     {guideName}
                 </Text>
                 <View style={styles.smallTextContainer}>
-                    <Text style={styles.text}>
-                        Guide {currentGuideNumber} / {totalGuides}
-                    </Text>
-                    <Text style={styles.text}>
-                        {minutes}:{seconds < 10 ? '0' : ''}{seconds}
-                    </Text>
+                    {this.renderGuideNumber()}
+                    {this.renderGuideTimer()}
                 </View>
             </View>
         );
