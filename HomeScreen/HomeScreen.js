@@ -1,18 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import { useScreens } from 'react-native-screens';
-useScreens();
+import { StyleSheet, Button, View, Text } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
-export default class HomeScreen extends React.Component {
-    render () {
-        return (
-            <View style={styles.container}>
-                <Text>Guide 1</Text>
-                <Text>Guide 2</Text>
-            </View>
-        );
+import SessionData from '../SessionData';
+
+export default function HomeScreen(props) {
+    const switchToSession = async (sessionData) => {
+        await AsyncStorage.setItem('@session', sessionData);
+        props.navigation.navigate('SessionPlayer');
     }
+
+    return (
+        <View style={styles.container}>
+            <Button
+                title="Tough Moment"
+                onPress={() => {
+                    switchToSession(JSON.stringify(SessionData.toughMoment))
+                }}
+            />
+            <Button
+                title="Doubt"
+                onPress={() => {
+                    switchToSession(JSON.stringify(SessionData.doubt))
+                }}
+            />
+            <Button
+                title="Motivation"
+                onPress={() => {
+                    switchToSession(JSON.stringify(SessionData.motivation))
+                }}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

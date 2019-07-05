@@ -5,15 +5,18 @@ useScreens();
 import HomeScreen from './HomeScreen';
 import SessionPlayer from './SessionPlayer';
 
-const AppNavigator = createSwitchNavigator({
-    HomeScreen: {
-        screen: HomeScreen,
+const AppNavigator = createSwitchNavigator(
+    {
+        HomeScreen: {
+            screen: HomeScreen,
+        },
+        SessionPlayer: {
+            screen: SessionPlayer,
+        },
     },
-    SessionPlayer: {
-        screen: SessionPlayer,
-    },
-}, {
-    initialRouteName: 'HomeScreen',
-});
+    {
+        initialRouteName: 'HomeScreen',
+    }
+);
 
 export default createAppContainer(AppNavigator);
