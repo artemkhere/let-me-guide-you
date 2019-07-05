@@ -24,14 +24,25 @@ export default class SessionPlayer extends Component {
     }
 
     async componentDidMount() {
+        this.didMount = true;
+
         const sessionData = await AsyncStorage.getItem('@session');
         const session = JSON.parse(sessionData);
 
-        this.setState({
-            session,
-            currentGuide: session[0],
-            currentInstruction: session[0].instructions[0],
-        });
+        // This is to prevent a race condition where this component is unmounted
+        // before the AsyncStorage.getItem completes and thus a memory leak
+        // occurs.
+        if (this.didMount) {
+            this.setState({
+                session,
+                currentGuide: session[0],
+                currentInstruction: session[0].instructions[0],
+            });
+        }
+    }
+
+    componentWillunmount() {
+        this.didMount = false;
     }
 
     onInstructionEndHandler = () => {
@@ -196,6 +207,8 @@ export default class SessionPlayer extends Component {
             session,
         } = this.state;
 
+        const { navigation } = this.props;
+
         if (session === null) {
             return (
                 <SafeAreaView style={styles.container}>
@@ -217,6 +230,7 @@ export default class SessionPlayer extends Component {
                             guideState={guideState}
                             totalGuides={totalGuides}
                             currentGuideNumber={currentGuideIndex + 1}
+                            navigation={navigation}
                         />
                     </View>
                     <View style={styles.displayedInstruction}>

@@ -14,21 +14,21 @@ export default function HomeScreen(props) {
         <View style={styles.container}>
             <Button
                 title="Tough Moment"
-                onPress={() => {
+                onPress={() =>
                     switchToSession(JSON.stringify(SessionData.toughMoment))
-                }}
+                }
             />
             <Button
                 title="Doubt"
-                onPress={() => {
+                onPress={() =>
                     switchToSession(JSON.stringify(SessionData.doubt))
-                }}
+                }
             />
             <Button
                 title="Motivation"
-                onPress={() => {
+                onPress={() =>
                     switchToSession(JSON.stringify(SessionData.motivation))
-                }}
+                }
             />
         </View>
     );
