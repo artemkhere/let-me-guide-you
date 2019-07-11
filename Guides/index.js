@@ -1,4 +1,5 @@
 import GlobalPaused from './Global/Paused';
+import GlobalSessionFinished from './Global/SessionFinished';
 
 import BreathingPlaying from './Breathing/Playing';
 import BreathingFinished from './Breathing/Finished';
@@ -12,6 +13,7 @@ import RepeatWordsFinished from './RepeatWords/Finished';
 export default {
     Global: {
         Paused: GlobalPaused,
+        SessionFinished: GlobalSessionFinished,
     },
     Breathing: {
         Playing: BreathingPlaying,

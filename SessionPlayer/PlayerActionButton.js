@@ -17,7 +17,10 @@ export default class PlayerActionButton extends Component {
                 iconName = 'ios-play';
                 break;
             case 'finished':
-                iconName = 'ios-confirmation';
+                iconName = 'ios-checkmark-circle-outline';
+                break;
+            case 'session_finished':
+                iconName = 'ios-checkmark-circle';
                 break;
             default:
                 iconName = 'Something went wrong in the Player Action Button.';

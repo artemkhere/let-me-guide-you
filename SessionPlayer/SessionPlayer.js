@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { SafeAreaView, View, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import PlayerActionButton from './PlayerActionButton';
+import HUD from './HUD';
 
-import Guides from './Guides';
+import Guides from '../Guides';
 
 export default class SessionPlayer extends Component {
     constructor(props) {
@@ -59,7 +61,7 @@ export default class SessionPlayer extends Component {
             ];
 
         this.state = {
-            guideState: 'playing', // 'playing', 'paused', 'finished'
+            guideState: 'playing', // 'playing', 'paused', 'finished', 'session_finished'
             currentGuideIndex: 0,
             currentGuide: this.session[0],
             currentInstructionIndex: 0,
@@ -76,7 +78,8 @@ export default class SessionPlayer extends Component {
             currentInstructionIndex,
             currentGuideIndex,
             currentGuide,
-            currentInstruction
+            currentInstruction,
+            guideState,
         } = this.state;
 
         const nextInstruction =
@@ -92,17 +95,67 @@ export default class SessionPlayer extends Component {
                 currentInstructionIndex: nextInstructionIndex,
                 currentInstruction: currentGuide.instructions[nextInstructionIndex],
             });
-        } else if (typeof nextGuide !== 'undefined') {
+        } else if (
+            typeof nextGuide !== 'undefined'
+            && guideState === 'playing'
+        ) {
+            this.setState({
+                guideState: 'finished',
+            });
+        } else if (
+            typeof nextGuide !== 'undefined'
+            && guideState === 'finished'
+        ) {
             const nextGuideIndex = currentGuideIndex + 1;
 
             this.setState({
+                guideState: 'playing',
                 currentInstructionIndex: 0,
                 currentInstruction: nextGuide.instructions[0],
                 currentGuideIndex: nextGuideIndex,
                 currentGuide: nextGuide,
             });
         } else {
+            this.setState({
+                guideState: 'session_finished',
+            });
             console.log('All guides have been completed');
+        }
+    }
+
+    decrementGuide = () => {
+        const { currentGuideIndex } = this.state;
+        const previousGuideIndex = currentGuideIndex - 1;
+
+        if (0 <= previousGuideIndex) {
+            const previousGuide = this.session[previousGuideIndex];
+
+            this.setState({
+                guideState: 'playing',
+                currentInstructionIndex: 0,
+                currentInstruction: previousGuide.instructions[0],
+                currentGuideIndex: previousGuideIndex,
+                currentGuide: previousGuide,
+            });
+        }
+    }
+
+    incrementGuide = () => {
+        const { currentGuideIndex } = this.state;
+        const nextGuide = this.session[currentGuideIndex + 1];
+
+        if (
+            typeof nextGuide !== 'undefined'
+        ) {
+            const nextGuideIndex = currentGuideIndex + 1;
+
+            this.setState({
+                guideState: 'playing',
+                currentInstructionIndex: 0,
+                currentInstruction: nextGuide.instructions[0],
+                currentGuideIndex: nextGuideIndex,
+                currentGuide: nextGuide,
+            });
         }
     }
 
@@ -121,9 +174,50 @@ export default class SessionPlayer extends Component {
                 this.setState({ guideState: 'playing' });
                 break;
             case 'finished':
-                incrementInstructionOrGuide();
+                this.incrementInstructionOrGuide();
                 break;
         }
+    }
+
+    determineDisplayedInstruction = () => {
+        const {
+            guideState,
+            currentGuide
+        } = this.state;
+
+        switch (guideState) {
+            case 'playing':
+                return DisplayedInstruction =
+                    Guides[currentGuide.guideName].Playing;
+            case 'paused':
+                return DisplayedInstruction =
+                    Guides.Global.Paused;
+            case 'finished':
+                return DisplayedInstruction =
+                    Guides[currentGuide.guideName].Finished;
+            case 'session_finished':
+                return DisplayedInstruction =
+                    Guides.Global.SessionFinished;
+        }
+    }
+
+    navigateGuideButton = (iconName, onPressHandler) => {
+        return (
+            <Icon
+                name={iconName}
+                color="#FFD1D5"
+                size={48}
+                onPress={onPressHandler}
+            />
+        );
+    }
+
+    decrementGuideButton = () => {
+        return this.navigateGuideButton('ios-arrow-dropleft', this.decrementGuide);
+    }
+
+    incrementGuideButton = () => {
+        return this.navigateGuideButton('ios-arrow-dropright', this.incrementGuide);
     }
 
     render() {
@@ -135,37 +229,44 @@ export default class SessionPlayer extends Component {
             guideState,
         } = this.state;
 
-        let DisplayedInstruction;
-
-        switch (guideState) {
-            case 'playing':
-                DisplayedInstruction = Guides[currentGuide.guideName].Playing;
-                break;
-            case 'paused':
-                DisplayedInstruction = Guides.Global.Paused;
-            case 'finished':
-                DisplayedInstruction = Guides[currentGuide.guideName].Finished;
-        }
+        const DisplayedInstruction = this.determineDisplayedInstruction();
+        const totalGuides = Object.keys(Guides).length - 1; // -1 to remove "Global" key
 
         return (
-            <View style={styles.container}>
-                <View style={styles.sceneProcessor}>
-                    <View style={styles.scenePlayground}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.sessionPlayer}>
+                    <View style={styles.HUDContainer}>
+                        <HUD
+                            key={currentGuideIndex.toString()}
+                            guideName={currentGuide.guideName}
+                            guideState={guideState}
+                            totalGuides={totalGuides}
+                            currentGuideNumber={currentGuideIndex + 1}
+                        />
+                    </View>
+                    <View style={styles.displayedInstruction}>
                         <DisplayedInstruction
-                            key={currentGuideIndex.toString() + currentInstructionIndex.toString()}
+                            key={
+                                currentGuideIndex.toString()
+                                + currentInstructionIndex.toString()
+                                + this.state.guideState
+                            }
                             onInstructionEnd={this.onInstructionEndHandler}
                             duration={currentInstruction.duration}
                             instructionsText={currentInstruction.instructionsText}
                         />
                     </View>
                     <View style={styles.actionButtonContainer}>
+                        {this.decrementGuideButton()}
                         <PlayerActionButton
+                            key={this.state.guideState}
                             onPress={this.actionButtonHandler}
                             guideState={this.state.guideState}
                         />
+                        {this.incrementGuideButton()}
                     </View>
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }
@@ -173,24 +274,27 @@ export default class SessionPlayer extends Component {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        flex: 1,
-        backgroundColor: '#ecf0f1',
+        display: 'flex',
+        backgroundColor: '#201533',
     },
-    sceneProcessor: {
+    sessionPlayer: {
         width: '100%',
         height: '100%',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
     },
-    scenePlayground: {
+    HUDContainer: {
         width: '100%',
-        flex: 1,
-        backgroundColor: '#ecf0f1',
+    },
+    displayedInstruction: {
+        width: '100%',
     },
     actionButtonContainer: {
         width: '100%',
         height: 80,
         paddingBottom: 16,
-        display: 'flex',
         alignItems: 'center',
-        backgroundColor: '#201633',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 });
