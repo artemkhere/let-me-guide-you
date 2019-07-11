@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Button, View, Text } from 'react-native';
 import { AsyncStorage } from 'react-native';
 
-import SessionData from '../SessionData';
+import SessionData from '../SessionPlayer/SessionData';
 
 export default function HomeScreen(props) {
     const switchToSession = async (sessionData) => {
