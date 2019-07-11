@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { View, Text, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class HUD extends Component {
     constructor(props) {
@@ -33,6 +34,19 @@ export default class HUD extends Component {
         }
     }
 
+    renderCloseButton = () => {
+        const { navigate } = this.props.navigation;
+
+        return (
+            <Icon
+                name="ios-close"
+                color="#FFD1D5"
+                size={48}
+                onPress={() => navigate('HomeScreen')}
+            />
+        )
+    }
+
     renderGuideNumber = () => {
         const { currentGuideNumber, totalGuides } = this.props;
 
@@ -61,6 +75,7 @@ export default class HUD extends Component {
 
         return (
             <View style={styles.container}>
+                {this.renderCloseButton()}
                 <Text style={styles.guideName}>
                     {guideName}
                 </Text>
@@ -78,6 +93,7 @@ HUD.propTypes = {
     totalGuides: PropTypes.number.isRequired,
     guideName: PropTypes.string.isRequired,
     guideState: PropTypes.string.isRequired,
+    navigation: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
