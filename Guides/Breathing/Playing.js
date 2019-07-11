@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
+import ProgressCircle from 'react-native-progress-circle';
 
 export default class Playing extends Component {
     constructor(props) {
@@ -10,10 +11,25 @@ export default class Playing extends Component {
             backgroundBallSize: new Animated.Value(100),
             holdBreathBallOpacity: new Animated.Value(0),
             frontText: 'Breath In',
+            progressCircleCompletion: new Animated.Value(0),
+            progressCircleCompletionValue: 0,
+            progressValueListener: null,
+            progressCircleAnimationProcess: null,
         }
     }
 
     componentDidMount() { this.breathIn(); }
+
+    componentWillUnmount() {
+        const {
+            progressCircleCompletion,
+            progressValueListener,
+            progressCircleAnimationProcess,
+        } = this.state;
+
+        progressCircleCompletion.removeListener(progressValueListener);
+        Animated.timing(progressCircleCompletion).stop();
+    }
 
     breathIn = () => {
         const backgroundBallSize = this.state.backgroundBallSize;
@@ -83,22 +99,35 @@ export default class Playing extends Component {
             backgroundBallSize,
             holdBreathBallOpacity,
             frontText,
+            progressCircleCompletion,
+            progressCircleCompletionValue
         } = this.state;
 
         return (
-            <Animated.View style={[
-                styles.backgroundBall,
-                {
-                    width: backgroundBallSize,
-                    height: backgroundBallSize,
-                },
-            ]}>
-                <Text style={styles.frontText}>{frontText}</Text>
-                <Animated.View style={[
-                    styles.holdBreathBall,
-                    { opacity: holdBreathBallOpacity },
-                ]} />
-            </Animated.View>
+            <View style={styles.guideArrangment}>
+                <ProgressCircle
+                    percent={progressCircleCompletionValue}
+                    radius={120}
+                    borderWidth={8}
+                    color="#B38C97"
+                    shadowColor="#382943"
+                    bgColor="#201633"
+                >
+                    <Animated.View style={[
+                        styles.backgroundBall,
+                        {
+                            width: backgroundBallSize,
+                            height: backgroundBallSize,
+                        },
+                    ]}>
+                        <Text style={styles.frontText}>{frontText}</Text>
+                        <Animated.View style={[
+                            styles.holdBreathBall,
+                            { opacity: holdBreathBallOpacity },
+                        ]} />
+                    </Animated.View>
+                </ProgressCircle>
+            </View>
         );
     }
 }
@@ -109,6 +138,14 @@ Playing.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    guideArrangment: {
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        backgroundColor: '#201633',
+    },
     backgroundBall: {
         display: 'flex',
         justifyContent: 'center',
@@ -131,5 +168,15 @@ const styles = StyleSheet.create({
     frontText: {
         fontSize: 24,
         color: '#333',
-    }
+    },
+    instructionsContainer: {
+        width: '100%',
+        marginTop: 48,
+        display: 'flex',
+        alignItems: 'center'
+    },
+    instructionsText: {
+        fontSize: 20,
+        color: '#FFD1D5',
+    },
 });
