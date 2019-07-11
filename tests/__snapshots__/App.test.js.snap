@@ -13,123 +13,86 @@ exports[`App test against snapshot 1`] = `
   }
 >
   <View
-    accessibilityRole="button"
-    accessibilityStates={Array []}
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "opacity": 1,
+        "backgroundColor": "#ecf0f1",
+        "flex": 1,
+        "width": "100%",
       }
     }
   >
     <View
       style={
-        Array [
-          Object {},
-        ]
+        Object {
+          "height": "100%",
+          "width": "100%",
+        }
       }
     >
-      <Text
+      <View
         style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "padding": 8,
-              "textAlign": "center",
-            },
-          ]
+          Object {
+            "backgroundColor": "#ecf0f1",
+            "flex": 1,
+            "width": "100%",
+          }
         }
       >
-        Tough Moment
-      </Text>
-    </View>
-  </View>
-  <View
-    accessibilityRole="button"
-    accessibilityStates={Array []}
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "opacity": 1,
-      }
-    }
-  >
-    <View
-      style={
-        Array [
-          Object {},
-        ]
-      }
-    >
-      <Text
-        style={
-          Array [
+        <View
+          style={
             Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "padding": 8,
-              "textAlign": "center",
-            },
-          ]
+              "alignItems": "center",
+              "backgroundColor": "greenyellow",
+              "borderRadius": 300,
+              "display": "flex",
+              "height": 100,
+              "justifyContent": "center",
+              "width": 100,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#333",
+                "fontSize": 24,
+              }
+            }
+          >
+            Breath In
+          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "tomato",
+                "borderRadius": 120,
+                "display": "flex",
+                "height": 120,
+                "justifyContent": "center",
+                "opacity": 0,
+                "width": 120,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#201633",
+            "display": "flex",
+            "height": 80,
+            "paddingBottom": 16,
+            "width": "100%",
+          }
         }
       >
-        Doubt
-      </Text>
-    </View>
-  </View>
-  <View
-    accessibilityRole="button"
-    accessibilityStates={Array []}
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "opacity": 1,
-      }
-    }
-  >
-    <View
-      style={
-        Array [
-          Object {},
-        ]
-      }
-    >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#007AFF",
-              "fontSize": 18,
-              "padding": 8,
-              "textAlign": "center",
-            },
-          ]
-        }
-      >
-        Motivation
-      </Text>
+        <View>
+          <Text />
+        </View>
+      </View>
     </View>
   </View>
 </View>

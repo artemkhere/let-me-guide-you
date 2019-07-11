@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { AsyncStorage } from 'react-native';
 
 import PlayerActionButton from './PlayerActionButton';
 import HUD from './HUD';
@@ -13,36 +12,61 @@ export default class SessionPlayer extends Component {
     constructor(props) {
         super(props);
 
+        this.session =
+            [ // A Session
+                { // A Guide
+                    guideName: 'RepeatWords',
+                    instructions: [
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
+                        },
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
+                        },
+                        { // An Instruction
+                            duration: [2.5],
+                            instructionsText: 'this is NOTHING to me!'
+                        },
+                    ]
+                },
+
+                { // A Guide
+                    guideName: 'Breathing',
+                    instructions: [
+                        { // An Instruction
+                            duration: [4, 2, 4, 0],
+                        },
+                        {
+                            duration: [4, 2, 4, 0],
+                        },
+                        {
+                            duration: [4, 2, 4, 0],
+                        },
+                    ]
+                },
+
+                { // Guide
+                    guideName: 'PowerPose',
+                    instructions: [
+                        { // An Instruction
+                            duration: [15],
+                        },
+                        {
+                            duration: [20],
+                        }
+                    ]
+                }
+            ];
+
         this.state = {
-            session: null,
             guideState: 'playing', // 'playing', 'paused', 'finished', 'session_finished'
             currentGuideIndex: 0,
-            currentGuide: null,
+            currentGuide: this.session[0],
             currentInstructionIndex: 0,
-            currentInstruction: null,
+            currentInstruction: this.session[0].instructions[0],
         };
-    }
-
-    async componentDidMount() {
-        this.didMount = true;
-
-        const sessionData = await AsyncStorage.getItem('@session');
-        const session = JSON.parse(sessionData);
-
-        // This is to prevent a race condition where this component is unmounted
-        // before the AsyncStorage.getItem completes and thus a memory leak
-        // occurs.
-        if (this.didMount) {
-            this.setState({
-                session,
-                currentGuide: session[0],
-                currentInstruction: session[0].instructions[0],
-            });
-        }
-    }
-
-    componentWillunmount() {
-        this.didMount = false;
     }
 
     onInstructionEndHandler = () => {
@@ -56,14 +80,13 @@ export default class SessionPlayer extends Component {
             currentGuide,
             currentInstruction,
             guideState,
-            session,
         } = this.state;
 
         const nextInstruction =
-            session[currentGuideIndex]
+            this.session[currentGuideIndex]
                 .instructions[currentInstructionIndex + 1];
 
-        const nextGuide = session[currentGuideIndex + 1];
+        const nextGuide = this.session[currentGuideIndex + 1];
 
         if (typeof nextInstruction !== 'undefined') {
             const nextInstructionIndex = currentInstructionIndex + 1;
@@ -105,7 +128,7 @@ export default class SessionPlayer extends Component {
         const previousGuideIndex = currentGuideIndex - 1;
 
         if (0 <= previousGuideIndex) {
-            const previousGuide = session[previousGuideIndex];
+            const previousGuide = this.session[previousGuideIndex];
 
             this.setState({
                 guideState: 'playing',
@@ -118,8 +141,8 @@ export default class SessionPlayer extends Component {
     }
 
     incrementGuide = () => {
-        const { currentGuideIndex, session } = this.state;
-        const nextGuide = session[currentGuideIndex + 1];
+        const { currentGuideIndex } = this.state;
+        const nextGuide = this.session[currentGuideIndex + 1];
 
         if (
             typeof nextGuide !== 'undefined'
@@ -137,14 +160,14 @@ export default class SessionPlayer extends Component {
     }
 
     actionButtonHandler = () => {
-        const { guideState, session } = this.state;
+        const { guideState } = this.state;
 
         switch(guideState) {
             case 'playing':
                 this.setState({
                     guideState: 'paused',
                     currentInstructionIndex: 0,
-                    currentInstruction: session[0].instructions[0],
+                    currentInstruction: this.session[0].instructions[0],
                 });
                 break;
             case 'paused':
@@ -204,21 +227,10 @@ export default class SessionPlayer extends Component {
             currentInstruction,
             currentInstructionIndex,
             guideState,
-            session,
         } = this.state;
 
-        const { navigation } = this.props;
-
-        if (session === null) {
-            return (
-                <SafeAreaView style={styles.container}>
-                    <Text>LOADING...</Text>
-                </SafeAreaView>
-            );
-        }
-
         const DisplayedInstruction = this.determineDisplayedInstruction();
-        const totalGuides = Object.keys(session).length;
+        const totalGuides = Object.keys(Guides).length - 1; // -1 to remove "Global" key
 
         return (
             <SafeAreaView style={styles.container}>
@@ -230,7 +242,6 @@ export default class SessionPlayer extends Component {
                             guideState={guideState}
                             totalGuides={totalGuides}
                             currentGuideNumber={currentGuideIndex + 1}
-                            navigation={navigation}
                         />
                     </View>
                     <View style={styles.displayedInstruction}>

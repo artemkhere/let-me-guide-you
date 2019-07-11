@@ -1,22 +1,24 @@
-import { createSwitchNavigator, createAppContainer } from "react-navigation";
-import { useScreens } from 'react-native-screens';
-useScreens();
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import HomeScreen from './HomeScreen';
 import SessionPlayer from './SessionPlayer';
 
-const AppNavigator = createSwitchNavigator(
-    {
-        HomeScreen: {
-            screen: HomeScreen,
-        },
-        SessionPlayer: {
-            screen: SessionPlayer,
-        },
-    },
-    {
-        initialRouteName: 'HomeScreen',
+export default class App extends React.Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <SessionPlayer />
+            </View>
+        );
     }
-);
+}
 
-export default createAppContainer(AppNavigator);
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
