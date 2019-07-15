@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 
 export default class SessionFinished extends Component {
     render() {
         return (
-            <View>
-                <Text>All Finished!</Text>
+            <View style={styles.container}>
+                <Text style={styles.frontText}>Session Complete!</Text>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    frontText: {
+        fontSize: 20,
+        color: '#FFD1D5',
+    },
+});
