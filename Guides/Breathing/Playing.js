@@ -8,8 +8,7 @@ export default class Playing extends Component {
         super(props);
 
         this.state = {
-            backgroundBallSize: new Animated.Value(100),
-            holdBreathBallOpacity: new Animated.Value(0),
+            backgroundBallSize: new Animated.Value(120),
             frontText: 'Breath In',
             progressCircleCompletion: new Animated.Value(0),
             progressCircleCompletionValue: 0,
@@ -36,7 +35,7 @@ export default class Playing extends Component {
         const duration = this.props.duration;
 
         Animated.timing(backgroundBallSize, {
-            toValue: 300,
+            toValue: 228,
             duration: duration[0] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
@@ -50,6 +49,30 @@ export default class Playing extends Component {
         })
     }
 
+    holdBreath = (duration, nextAction) => {
+        const progressCircleCompletion = this.state.progressCircleCompletion;
+
+        Animated.timing(progressCircleCompletion, {
+            toValue: 100,
+            duration: duration * 1000
+        }).start((event) => {
+            if (event.finished) {
+                this.setState({
+                    frontText: 'Breath Out',
+                    progressCircleCompletion: new Animated.Value(0),
+                    progressCircleCompletionValue: 0,
+                });
+                nextAction();
+            }
+        });
+
+        const progressValueListener = progressCircleCompletion.addListener(({ value }) => {
+            this.setState({ progressCircleCompletionValue: value });
+        });
+
+        this.setState({ progressValueListener });
+    }
+
     breathOut = () => {
         const {
             duration,
@@ -59,7 +82,7 @@ export default class Playing extends Component {
         const backgroundBallSize = this.state.backgroundBallSize;
 
         Animated.timing(backgroundBallSize, {
-            toValue: 180,
+            toValue: 120,
             duration: duration[2] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
@@ -72,32 +95,9 @@ export default class Playing extends Component {
         })
     }
 
-    holdBreath = (duration, nextAction) => {
-        const holdBreathBallOpacity = this.state.holdBreathBallOpacity;
-
-        Animated.sequence([
-            Animated.timing(holdBreathBallOpacity, {
-                toValue: 1,
-                duration: duration * 500,
-                easing: Easing.inOut(Easing.quad)
-            }),
-            Animated.timing(holdBreathBallOpacity, {
-                toValue: 0,
-                duration: duration * 500,
-                easing: Easing.inOut(Easing.quad)
-            })
-        ]).start((event) => {
-            if (event.finished) {
-                this.setState({ frontText: 'Breath Out' });
-                nextAction();
-            }
-        })
-    }
-
     render() {
         const {
             backgroundBallSize,
-            holdBreathBallOpacity,
             frontText,
             progressCircleCompletion,
             progressCircleCompletionValue
@@ -119,13 +119,10 @@ export default class Playing extends Component {
                             width: backgroundBallSize,
                             height: backgroundBallSize,
                         },
-                    ]}>
+                    ]} />
+                    <View style={styles.permanentCenterBall}>
                         <Text style={styles.frontText}>{frontText}</Text>
-                        <Animated.View style={[
-                            styles.holdBreathBall,
-                            { opacity: holdBreathBallOpacity },
-                        ]} />
-                    </Animated.View>
+                    </View>
                 </ProgressCircle>
             </View>
         );
@@ -147,35 +144,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#201633',
     },
     backgroundBall: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'greenyellow',
-        borderRadius: 300,
-        width: 100,
-        height: 100,
-    },
-    holdBreathBall: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'tomato',
-        borderRadius: 120,
-        opacity: 0,
         width: 120,
         height: 120,
+        backgroundColor: '#E2B2B7',
+        opacity: 0.34,
+        borderRadius: 240,
+    },
+    permanentCenterBall: {
+        width: 126,
+        height: 126,
+        borderRadius: 120,
+        position: 'absolute',
+        top: 50,
+        left: 50,
+        backgroundColor: '#92717F',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
     },
     frontText: {
-        fontSize: 24,
-        color: '#333',
-    },
-    instructionsContainer: {
-        width: '100%',
-        marginTop: 48,
-        display: 'flex',
-        alignItems: 'center'
-    },
-    instructionsText: {
         fontSize: 20,
         color: '#FFD1D5',
     },
