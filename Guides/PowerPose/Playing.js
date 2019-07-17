@@ -62,7 +62,7 @@ export default class Playing extends Component {
         } = this.state;
 
         return (
-            <View style={styles.sceneArrangment}>
+            <View style={styles.guideArrangment}>
                 <ProgressCircle
                     percent={progressCircleCompletionValue}
                     radius={120}
@@ -87,7 +87,7 @@ Playing.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    sceneArrangment: {
+    guideArrangment: {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
