@@ -5,14 +5,14 @@ export default {
                 guideName: 'Breathing',
                 instructions: [
                     { // An Instruction
-                        duration: [4, 2, 4, 0],
+                        duration: [1, 0, 1, 0],
                     },
-                    {
-                        duration: [4, 2, 4, 0],
-                    },
-                    {
-                        duration: [4, 2, 4, 0],
-                    },
+                    // {
+                    //     duration: [4, 2, 4, 2],
+                    // },
+                    // {
+                    //     duration: [4, 2, 4, 2],
+                    // },
                 ]
             },
         ],
