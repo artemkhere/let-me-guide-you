@@ -11,13 +11,15 @@ export default class Paused extends Component {
 
     componentDidMount() { this.playBackgroundAnimation(); }
 
+    componentWillUnmount() { Animated.timing(this.state.backgroundBallSize).stop(); }
+
     playBackgroundAnimation = () => {
         const backgroundBallSize = this.state.backgroundBallSize;
 
         Animated.loop(
             Animated.sequence([
                 Animated.timing(backgroundBallSize, {
-                    toValue: 300,
+                    toValue: 260,
                     duration: 1500,
                     easing: Easing.linear,
                 }),
@@ -34,34 +36,44 @@ export default class Paused extends Component {
         const backgroundBallSize = this.state.backgroundBallSize;
 
         return (
-            <View>
+            <View style={styles.pauseArrangment}>
+                <Text style={styles.frontText}>Paused</Text>
                 <Animated.View style={[
                     styles.backgroundBall,
                     {
                         width: backgroundBallSize,
                         height: backgroundBallSize,
                     },
-                ]}>
-                    <Text style={styles.frontText}>Paused</Text>
-                </Animated.View>
+                ]} />
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    backgroundBall: {
+    pauseArrangment: {
+        width: '100%',
+        height: 280,
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'greenyellow',
-        borderRadius: 300,
-        width: 100,
-        height: 100,
+        justifyContent: 'center',
+        flexDirection: 'column',
+        backgroundColor: '#201633',
+    },
+    backgroundBall: {
+        backgroundColor: '#E2B2B7',
+        opacity: 0.34,
+        borderRadius: 240,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
     },
     frontText: {
-        fontSize: 24,
-        color: '#333',
+        width: '100%',
+        fontSize: 20,
+        position: 'absolute',
+        top: 125,
+        color: '#FFD1D5',
+        textAlign: 'center',
     },
 });
-
