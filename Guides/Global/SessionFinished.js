@@ -5,7 +5,7 @@ export default class SessionFinished extends Component {
     render() {
         return (
             <View>
-                <Text>All Finished!</Text>
+                <Text>Your session is complete!</Text>
             </View>
         );
     }
