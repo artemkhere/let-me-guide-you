@@ -43,6 +43,7 @@ export default class HUD extends Component {
                 color="#FFD1D5"
                 size={48}
                 onPress={() => navigate('HomeScreen')}
+                style={styles.closeButton}
             />
         )
     }
@@ -52,7 +53,7 @@ export default class HUD extends Component {
 
         return (
             <Text style={styles.text}>
-                Guide {currentGuideNumber} / {totalGuides}
+                Step {currentGuideNumber} / {totalGuides}
             </Text>
         );
     }
@@ -74,12 +75,12 @@ export default class HUD extends Component {
         const { guideName } = this.props;
 
         return (
-            <View style={styles.container}>
-                {this.renderCloseButton()}
-                <Text style={styles.guideName}>
-                    {guideName}
-                </Text>
-                <View style={styles.smallTextContainer}>
+            <View style={styles.hudContainer}>
+                <View style={styles.closeButtonContainer}>
+                    {this.renderCloseButton()}
+                </View>
+                <Text style={styles.guideName}>{guideName}</Text>
+                <View style={styles.guideInfoContainer}>
                     {this.renderGuideNumber()}
                     {this.renderGuideTimer()}
                 </View>
@@ -97,15 +98,26 @@ HUD.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    hudContainer: {
+        width: '100%',
+        paddingLeft: 8,
+        paddingRight: 8,
+    },
+    closeButtonContainer: {
+        width: '100%',
+        height: 40,
+    },
+    closeButton: {
+        position: 'absolute',
+        right: 0,
+    },
     guideName: {
-        fontSize: 20,
+        fontSize: 26,
         fontWeight: 'bold',
         color: '#e3b2b6',
+        marginBottom: 8,
     },
-    container: {
-        width: '100%',
-    },
-    smallTextContainer: {
+    guideInfoContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     },

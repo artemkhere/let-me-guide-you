@@ -183,7 +183,7 @@ export default class SessionPlayer extends Component {
             <Icon
                 name={iconName}
                 color="#FFD1D5"
-                size={48}
+                size={36}
                 onPress={onPressHandler}
             />
         );
@@ -281,7 +281,9 @@ const styles = StyleSheet.create({
     actionButtonContainer: {
         width: '100%',
         height: 80,
+        paddingRight: 8,
         paddingBottom: 16,
+        paddingLeft: 8,
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
