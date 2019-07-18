@@ -49,5 +49,24 @@ export default {
                     },
                 ]
             },
+        ],
+    inspiration:
+        [
+            { // A Guide
+                guideName: 'OneInstruction',
+                instructions: [
+                    { // An Instruction
+                        instructionsText: 'Stop and think.'
+                    },
+                ]
+            },
+            { // A Guide
+                guideName: 'OneInstruction',
+                instructions: [
+                    { // An Instruction
+                        instructionsText: 'I should see this.'
+                    },
+                ]
+            },
         ]
 };
