@@ -43,13 +43,12 @@ export default class Playing extends Component {
     render() {
         return (
             <View style={styles.sceneArrangment}>
+                <Text style={styles.instructionsText}>Say This</Text>
+                <Text style={styles.instructionsText}>(outloud if you can)</Text>
                 <Animated.Text
                     style={[styles.instructionsText, { opacity: this.state.wordsOpacity }]}>
                         {this.props.instructionsText}
                 </Animated.Text>
-                <Text style={styles.descriptionText}>Say This</Text>
-                <Text style={styles.smallInstructionsText}>(outloud if you can)</Text>
-
             </View>
         );
     }
@@ -76,19 +75,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center'
     },
-    descriptionText: {
-        fontSize: 18,
-        color: '#FFD1D5',
-        marginTop: 32,
-        opacity: 0.7
-    },
-    smallInstructionsText: {
-        fontSize: 12,
-        color: '#FFD1D5',
-        opacity: 0.7
-    },
     instructionsText: {
-        fontSize: 26,
+        fontSize: 20,
         color: '#FFD1D5',
     },
 });

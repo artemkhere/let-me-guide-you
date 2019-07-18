@@ -36,15 +36,15 @@ export default {
                 guideName: 'RepeatWords',
                 instructions: [
                     { // An Instruction
-                        duration: [2.5],
+                        duration: [1.5],
                         instructionsText: 'this is NOTHING to me!'
                     },
                     { // An Instruction
-                        duration: [2.5],
+                        duration: [1.5],
                         instructionsText: 'this is NOTHING to me!'
                     },
                     { // An Instruction
-                        duration: [2.5],
+                        duration: [1.5],
                         instructionsText: 'this is NOTHING to me!'
                     },
                 ]
