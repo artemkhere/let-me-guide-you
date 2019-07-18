@@ -25,6 +25,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'column',
         backgroundColor: '#201633',
+        paddingLeft: 16,
+        paddingRight: 16,
     },
     instructionsContainer: {
         width: '100%',
@@ -35,5 +37,6 @@ const styles = StyleSheet.create({
     instructionsText: {
         fontSize: 20,
         color: '#FFD1D5',
+        textAlign: 'center',
     },
 });
