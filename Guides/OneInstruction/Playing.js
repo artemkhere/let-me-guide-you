@@ -1,61 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Text, Image, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 
 export default class Playing extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            wordsOpacity: new Animated.Value(0),
-            progressValueListener: null,
-            progressCircleAnimationProcess: null,
-        }
-    }
-
-    componentDidMount() { this.startInstructionsTextAnimation(); }
-
-    componentWillUnmount() { Animated.timing(this.state.wordsOpacity).stop(); }
-
-    startInstructionsTextAnimation = () => {
-        const {
-            duration,
-            onInstructionEnd,
-        } = this.props;
-
-        const wordsOpacity = this.state.wordsOpacity;
-
-        Animated.sequence([
-            Animated.timing(wordsOpacity, {
-                toValue: 1,
-                duration: 1000
-            }),
-            Animated.delay(duration[0] * 1000),
-            Animated.timing(wordsOpacity, {
-                toValue: 0,
-                duration: 1000
-            })
-        ]).start((event) => {
-            if (event.finished) { onInstructionEnd(); }
-        });
-    }
+    componentDidMount() { this.props.onInstructionEnd(); }
 
     render() {
         return (
             <View style={styles.sceneArrangment}>
-                <Text style={styles.instructionsText}>Say This</Text>
-                <Text style={styles.instructionsText}>(outloud if you can)</Text>
-                <Animated.Text
-                    style={[styles.instructionsText, { opacity: this.state.wordsOpacity }]}>
-                        {this.props.instructionsText}
-                </Animated.Text>
+                <Text style={styles.instructionsText}>{this.props.instructionsText}</Text>
             </View>
         );
     }
 }
 
 Playing.propTypes = {
-    duration: PropTypes.array,
     onInstructionEnd: PropTypes.func,
     instructionsText: PropTypes.string,
 };
