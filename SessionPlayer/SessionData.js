@@ -19,13 +19,22 @@ export default {
     doubt:
         [ // A Session
             { // A Guide
+                guideName: 'RepeatWords',
+                instructions: [
+                    { // An Instruction
+                        duration: [2.5],
+                        instructionsText: 'this is NOTHING to me!'
+                    },
+                ]
+            },
+            { // A Guide
                 guideName: 'PowerPose',
                 instructions: [
                     { // An Instruction
-                        duration: [15],
+                        duration: [10],
                     },
                     {
-                        duration: [20],
+                        duration: [10],
                     }
                 ]
             }

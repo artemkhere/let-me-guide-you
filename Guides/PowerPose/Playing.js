@@ -52,6 +52,7 @@ export default class Playing extends Component {
             this.setState({ progressCircleCompletionValue: value });
         });
 
+
         this.setState({ progressValueListener });
     }
 

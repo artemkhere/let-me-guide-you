@@ -137,14 +137,14 @@ export default class SessionPlayer extends Component {
     }
 
     actionButtonHandler = () => {
-        const { guideState, session } = this.state;
+        const { guideState, currentGuideIndex, session } = this.state;
 
         switch(guideState) {
             case 'playing':
                 this.setState({
                     guideState: 'paused',
                     currentInstructionIndex: 0,
-                    currentInstruction: session[0].instructions[0],
+                    currentInstruction: session[currentGuideIndex].instructions[0],
                 });
                 break;
             case 'paused':
