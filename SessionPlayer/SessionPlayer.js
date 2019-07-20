@@ -101,7 +101,7 @@ export default class SessionPlayer extends Component {
     }
 
     decrementGuide = () => {
-        const { currentGuideIndex } = this.state;
+        const { currentGuideIndex, session } = this.state;
         const previousGuideIndex = currentGuideIndex - 1;
 
         if (0 <= previousGuideIndex) {
