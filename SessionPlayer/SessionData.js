@@ -5,14 +5,41 @@ export default {
                 guideName: 'Breathing',
                 instructions: [
                     { // An Instruction
-                        duration: [1, 0, 1, 0],
+                        duration: [1, 1, 1, 0],
                     },
-                    // {
-                    //     duration: [4, 2, 4, 2],
-                    // },
-                    // {
-                    //     duration: [4, 2, 4, 2],
-                    // },
+                    { // An Instruction
+                        duration: [1, 1, 1, 0],
+                    },
+                ]
+            },
+            { // A Guide
+                guideName: 'RepeatWords',
+                instructions: [
+                    { // An Instruction
+                        duration: [0.5],
+                        instructionsText: 'this is NOTHING to me!'
+                    },
+                    { // An Instruction
+                        duration: [0.5],
+                        instructionsText: 'this is NOTHING to me!'
+                    },
+                ]
+            },
+            { // A Guide
+                guideName: 'RepeatWords',
+                instructions: [
+                    { // An Instruction
+                        duration: [0.5],
+                        instructionsText: 'another one!'
+                    },
+                ]
+            },
+            { // A Guide
+                guideName: 'PowerPose',
+                instructions: [
+                    { // An Instruction
+                        duration: [10],
+                    }
                 ]
             },
         ],
@@ -22,10 +49,10 @@ export default {
                 guideName: 'PowerPose',
                 instructions: [
                     { // An Instruction
-                        duration: [15],
+                        duration: [10],
                     },
                     {
-                        duration: [20],
+                        duration: [10],
                     }
                 ]
             }
@@ -36,16 +63,35 @@ export default {
                 guideName: 'RepeatWords',
                 instructions: [
                     { // An Instruction
-                        duration: [2.5],
+                        duration: [1.5],
                         instructionsText: 'this is NOTHING to me!'
                     },
                     { // An Instruction
-                        duration: [2.5],
+                        duration: [1.5],
                         instructionsText: 'this is NOTHING to me!'
                     },
                     { // An Instruction
-                        duration: [2.5],
+                        duration: [1.5],
                         instructionsText: 'this is NOTHING to me!'
+                    },
+                ]
+            },
+        ],
+    inspiration:
+        [
+            { // A Guide
+                guideName: 'OneInstruction',
+                instructions: [
+                    { // An Instruction
+                        instructionsText: 'Stop and think.'
+                    },
+                ]
+            },
+            { // A Guide
+                guideName: 'OneInstruction',
+                instructions: [
+                    { // An Instruction
+                        instructionsText: 'I should see this.'
                     },
                 ]
             },
