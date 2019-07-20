@@ -42,22 +42,6 @@ export default {
                     }
                 ]
             },
-            { // A Guide
-                guideName: 'OneInstruction',
-                instructions: [
-                    { // An Instruction
-                        instructionsText: 'Think of how you are going to seize the rest of your day.'
-                    },
-                ]
-            },
-            { // A Guide
-                guideName: 'OneInstruction',
-                instructions: [
-                    { // An Instruction
-                        instructionsText: 'I should see this.'
-                    },
-                ]
-            },
         ],
     doubt:
         [ // A Session
