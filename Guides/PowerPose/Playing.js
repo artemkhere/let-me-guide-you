@@ -36,9 +36,6 @@ export default class Playing extends Component {
 
         const progressCircleCompletion = this.state.progressCircleCompletion;
 
-        console.log('duration: ' + duration[0])
-        console.log('duration[0] * 1000: ' + duration[0] * 1000)
-
         Animated.timing(progressCircleCompletion, {
             toValue: 100,
             duration: duration[0] * 1000

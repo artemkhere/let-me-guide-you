@@ -39,12 +39,14 @@ export default class Playing extends Component {
             duration: duration[0] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (duration[1] > 0) {
-                this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(duration[1], this.breathOut);
-            } else if (event.finished) {
-                this.setState({ frontText: 'Breath Out' });
-                this.breathOut();
+            if (event.finished) {
+                if (duration[1] > 0) {
+                    this.setState({ frontText: 'Hold Breath' });
+                    this.holdBreath(duration[1], this.breathOut);
+                } else {
+                    this.setState({ frontText: 'Breath Out' });
+                    this.breathOut();
+                }
             }
         })
     }
@@ -86,11 +88,13 @@ export default class Playing extends Component {
             duration: duration[2] * 1000,
             easing: Easing.inOut(Easing.quad)
         }).start((event) => {
-            if (duration[3] > 0) {
-                this.setState({ frontText: 'Hold Breath' });
-                this.holdBreath(duration[3], onInstructionEnd);
-            } else if (event.finished) {
-                onInstructionEnd();
+            if (event.finished) {
+                if (duration[3] > 0) {
+                    this.setState({ frontText: 'Hold Breath' });
+                    this.holdBreath(duration[3], onInstructionEnd);
+                } else {
+                    onInstructionEnd();
+                }
             }
         })
     }
