@@ -13,7 +13,6 @@ export default class Playing extends Component {
             progressCircleCompletion: new Animated.Value(0),
             progressCircleCompletionValue: 0,
             progressValueListener: null,
-            progressCircleAnimationProcess: null,
         }
     }
 
@@ -21,13 +20,14 @@ export default class Playing extends Component {
 
     componentWillUnmount() {
         const {
+            backgroundBallSize,
             progressCircleCompletion,
             progressValueListener,
-            progressCircleAnimationProcess,
         } = this.state;
 
         progressCircleCompletion.removeListener(progressValueListener);
         Animated.timing(progressCircleCompletion).stop();
+        Animated.timing(backgroundBallSize).stop();
     }
 
     breathIn = () => {

@@ -13,7 +13,6 @@ export default class Playing extends Component {
             progressCircleCompletion: new Animated.Value(0),
             progressCircleCompletionValue: 0,
             progressValueListener: null,
-            progressCircleAnimationProcess: null,
         }
     }
 
@@ -23,7 +22,6 @@ export default class Playing extends Component {
         const {
             progressCircleCompletion,
             progressValueListener,
-            progressCircleAnimationProcess,
         } = this.state;
 
         progressCircleCompletion.removeListener(progressValueListener);
@@ -37,6 +35,9 @@ export default class Playing extends Component {
         } = this.props;
 
         const progressCircleCompletion = this.state.progressCircleCompletion;
+
+        console.log('duration: ' + duration[0])
+        console.log('duration[0] * 1000: ' + duration[0] * 1000)
 
         Animated.timing(progressCircleCompletion, {
             toValue: 100,
