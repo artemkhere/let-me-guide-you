@@ -8,6 +8,7 @@ export default class Playing extends Component {
         super(props);
 
         this.state = {
+            renderProgressCircle: false,
             introductionOpacity: new Animated.Value(0),
             progressCircleContainerOpacity: new Animated.Value(0),
             progressCircleCompletion: new Animated.Value(0),
@@ -16,7 +17,7 @@ export default class Playing extends Component {
         }
     }
 
-    componentDidMount() { this.startAnimation(); }
+    componentDidMount() { this.startIntroAnimation(); }
 
     componentWillUnmount() {
         const {
@@ -32,13 +33,8 @@ export default class Playing extends Component {
         Animated.timing(progressCircleCompletion).stop();
     }
 
-    startAnimation() {
-        const {
-            introductionOpacity,
-            progressCircleContainerOpacity,
-            progressCircleCompletion,
-            progressCircleCompletionValue
-        } = this.state;
+    startIntroAnimation() {
+        const introductionOpacity = this.state.introductionOpacity;
 
         Animated.sequence([
             Animated.timing(introductionOpacity, {
@@ -49,7 +45,23 @@ export default class Playing extends Component {
             Animated.timing(introductionOpacity, {
                 toValue: 0,
                 duration: 500,
-            }),
+            })
+        ]).start((event) => {
+            if (event.finished) {
+                this.setState({ renderProgressCircle: true });
+                this.startProgressCircleAnimation();
+            }
+        });
+    }
+
+    startProgressCircleAnimation() {
+        const {
+            progressCircleContainerOpacity,
+            progressCircleCompletion,
+            progressCircleCompletionValue
+        } = this.state;
+
+        Animated.sequence([
             Animated.timing(progressCircleContainerOpacity, {
                 toValue: 1,
                 duration: 500,
@@ -72,9 +84,25 @@ export default class Playing extends Component {
         this.setState({ progressValueListener });
     }
 
-    render() {
+    renderIntroduction() {
+        const introductionOpacity = this.state.introductionOpacity;
+
+        const instructionsText = this.props.instructionsText;
+
+        return (
+            <Animated.View style={[
+                styles.introductionContainer,
+                { opacity: introductionOpacity }
+            ]}>
+                <Text style={styles.instructionsText}>Close your eyes and think about this:</Text>
+                <Text style={styles.instructionsText}>{instructionsText}</Text>
+                <Text style={styles.clarificationText}>(don’t worry, your phone will vibrate when time is over)</Text>
+            </Animated.View>
+        );
+    }
+
+    renderProgressCircle() {
         const {
-            introductionOpacity,
             progressCircleContainerOpacity,
             progressCircleCompletionValue
         } = this.state;
@@ -82,27 +110,29 @@ export default class Playing extends Component {
         const instructionsText = this.props.instructionsText;
 
         return (
+            <Animated.View style={{ opacity: progressCircleContainerOpacity }}>
+                <ProgressCircle
+                    percent={progressCircleCompletionValue}
+                    radius={120}
+                    borderWidth={8}
+                    color="#B38C97"
+                    shadowColor="#382943"
+                    bgColor="#694965"
+                >
+                    <Text style={styles.progressText}>{instructionsText}</Text>
+                </ProgressCircle>
+            </Animated.View>
+        );
+    }
+
+    render() {
+        const renderProgressCircle = this.state.renderProgressCircle;
+
+        const instructionsText = this.props.instructionsText;
+
+        return (
             <View style={styles.guideArrangment}>
-                <Animated.View style={[
-                    styles.introductionContainer,
-                    { opacity: introductionOpacity }
-                ]}>
-                    <Text style={styles.instructionsText}>Close your eyes and think about this:</Text>
-                    <Text style={styles.instructionsText}>{instructionsText}</Text>
-                    <Text style={styles.clarificationText}>(don’t worry, your phone will vibrate when time is over)</Text>
-                </Animated.View>
-                <Animated.View style={{ opacity: progressCircleContainerOpacity }}>
-                    <ProgressCircle
-                        percent={progressCircleCompletionValue}
-                        radius={120}
-                        borderWidth={8}
-                        color="#B38C97"
-                        shadowColor="#382943"
-                        bgColor="#694965"
-                    >
-                        <Text style={styles.progressText}>{instructionsText}</Text>
-                    </ProgressCircle>
-                </Animated.View>
+                {renderProgressCircle ? this.renderProgressCircle() : this.renderIntroduction()}
             </View>
         );
     }
