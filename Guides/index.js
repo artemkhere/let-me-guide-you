@@ -10,6 +10,9 @@ import PowerPoseFinished from './PowerPose/Finished';
 import RepeatWordsPlaying from './RepeatWords/Playing';
 import RepeatWordsFinished from './RepeatWords/Finished';
 
+import ClosedEyesPlaying from './ClosedEyes/Playing';
+import ClosedEyesFinished from './ClosedEyes/Finished';
+
 export default {
     Global: {
         Paused: GlobalPaused,
@@ -26,5 +29,9 @@ export default {
     RepeatWords: {
         Playing: RepeatWordsPlaying,
         Finished: RepeatWordsFinished,
+    },
+    ClosedEyes: {
+        Playing: ClosedEyesPlaying,
+        Finished: ClosedEyesFinished,
     }
 };

@@ -60,6 +60,15 @@ export default {
     motivation:
         [
             { // A Guide
+                guideName: 'ClosedEyes',
+                instructions: [
+                    { // An Instruction
+                        duration: [10],
+                        instructionsText: 'How can you seize the rest of your day?'
+                    },
+                ]
+            },
+            { // A Guide
                 guideName: 'RepeatWords',
                 instructions: [
                     { // An Instruction
