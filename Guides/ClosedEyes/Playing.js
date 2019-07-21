@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated, Easing, Text, View, StyleSheet } from 'react-native';
+import { Animated, Easing, Text, View, StyleSheet, Vibration } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 
 export default class Playing extends Component {
@@ -32,7 +32,7 @@ export default class Playing extends Component {
         Animated.timing(progressCircleCompletion).stop();
     }
 
-    startAnimation() => {
+    startAnimation() {
         const {
             introductionOpacity,
             progressCircleContainerOpacity,
@@ -45,7 +45,7 @@ export default class Playing extends Component {
                 toValue: 1,
                 duration: 500,
             }),
-            Animated.delay(2500),
+            Animated.delay(6000),
             Animated.timing(introductionOpacity, {
                 toValue: 0,
                 duration: 500,
@@ -56,12 +56,12 @@ export default class Playing extends Component {
             }),
             Animated.timing(progressCircleCompletion, {
                 toValue: 100,
-                duration: duration[0] * 1000
+                duration: this.props.duration[0] * 1000
             })
         ]).start((event) => {
             if (event.finished) {
                 Vibration.vibrate(500);
-                onInstructionEnd();
+                this.props.onInstructionEnd();
             }
         });
 
@@ -83,28 +83,26 @@ export default class Playing extends Component {
 
         return (
             <View style={styles.guideArrangment}>
-                <View style={[
+                <Animated.View style={[
                     styles.introductionContainer,
-                    opacity: introductionOpacity,
+                    { opacity: introductionOpacity }
                 ]}>
                     <Text style={styles.instructionsText}>Close your eyes and think about this:</Text>
                     <Text style={styles.instructionsText}>{instructionsText}</Text>
-                    <Text style={styles.clarificationText}>(don’t worry, your phone will vibrate when the time is over)</Text>
-                </View>
-                <View style={[opacity: progressCircleContainerOpacity]}>
+                    <Text style={styles.clarificationText}>(don’t worry, your phone will vibrate when time is over)</Text>
+                </Animated.View>
+                <Animated.View style={{ opacity: progressCircleContainerOpacity }}>
                     <ProgressCircle
                         percent={progressCircleCompletionValue}
                         radius={120}
                         borderWidth={8}
                         color="#B38C97"
                         shadowColor="#382943"
-                        bgColor="#201633"
+                        bgColor="#694965"
                     >
-                        <View style={styles.backgroundBall}>
-                            <Text style={styles.instructionsText}>{instructionsText}</Text>
-                        </View>
+                        <Text style={styles.progressText}>{instructionsText}</Text>
                     </ProgressCircle>
-                </View>
+                </Animated.View>
             </View>
         );
     }
@@ -125,14 +123,27 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#201633',
     },
+    introductionContainer: {
+        paddingLeft: 16,
+        paddingRight: 16,
+    },
     instructionsText: {
         marginBottom: 48,
         fontSize: 20,
         color: '#FFD1D5',
+        textAlign: 'center',
     },
-    instructionsText: {
+    clarificationText: {
         fontSize: 14,
         color: '#FFD1D5',
+        textAlign: 'center',
+    },
+    progressText: {
+        paddingLeft: 8,
+        paddingRight: 8,
+        fontSize: 20,
+        color: '#FFD1D5',
+        textAlign: 'center',
     },
     backgroundBall: {
         width: 230,
