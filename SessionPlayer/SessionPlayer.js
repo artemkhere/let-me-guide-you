@@ -175,23 +175,39 @@ export default class SessionPlayer extends Component {
         }
     }
 
-    navigateGuideButton = (iconName, onPressHandler) => {
+    navigateGuideButton = (iconName, onPressHandler, disabled) => {
+        const onPress = disabled ? () => {} : onPressHandler;
+        const style = disabled ? { opacity: 0.5 } : {};
+
         return (
             <Icon
                 name={iconName}
                 color="#FFD1D5"
                 size={36}
-                onPress={onPressHandler}
+                onPress={onPress}
+                style={style}
             />
         );
     }
 
     decrementGuideButton = () => {
-        return this.navigateGuideButton('ios-arrow-dropleft', this.decrementGuide);
+        const disabled = this.state.currentGuideIndex === 0;
+
+        return this.navigateGuideButton(
+            'ios-arrow-dropleft',
+            this.decrementGuide,
+            disabled
+        );
     }
 
     incrementGuideButton = () => {
-        return this.navigateGuideButton('ios-arrow-dropright', this.incrementGuide);
+        const disabled = this.state.currentGuideIndex === this.state.session.length - 1;
+
+        return this.navigateGuideButton(
+            'ios-arrow-dropright',
+            this.incrementGuide,
+            disabled
+        );
     }
 
     render() {
