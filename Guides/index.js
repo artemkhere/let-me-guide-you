@@ -9,6 +9,9 @@ import PowerPoseFinished from './PowerPose/Finished';
 import RepeatWordsPlaying from './RepeatWords/Playing';
 import RepeatWordsFinished from './RepeatWords/Finished';
 
+import ClosedEyesPlaying from './ClosedEyes/Playing';
+import ClosedEyesFinished from './ClosedEyes/Finished';
+
 import OneInstructionPlaying from './OneInstruction/Playing';
 import OneInstructionFinished from './OneInstruction/Finished';
 
@@ -27,6 +30,10 @@ export default {
     RepeatWords: {
         Playing: RepeatWordsPlaying,
         Finished: RepeatWordsFinished,
+    },
+    ClosedEyes: {
+        Playing: ClosedEyesPlaying,
+        Finished: ClosedEyesFinished,
     },
     OneInstruction: {
         Playing: OneInstructionPlaying,
