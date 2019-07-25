@@ -30,6 +30,12 @@ export default function HomeScreen(props) {
                     switchToSession(JSON.stringify(SessionData.motivation))
                 }
             />
+            <Button
+                title="Inspiration"
+                onPress={() =>
+                    switchToSession(JSON.stringify(SessionData.inspiration))
+                }
+            />
         </View>
     );
 }
