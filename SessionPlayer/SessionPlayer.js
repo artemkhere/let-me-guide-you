@@ -96,7 +96,6 @@ export default class SessionPlayer extends Component {
             this.setState({
                 guideState: 'finished',
             });
-            console.log('All guides have been completed');
         }
     }
 
@@ -139,20 +138,26 @@ export default class SessionPlayer extends Component {
     actionButtonHandler = () => {
         const { guideState, currentGuideIndex, session } = this.state;
 
-        switch(guideState) {
-            case 'playing':
-                this.setState({
-                    guideState: 'paused',
-                    currentInstructionIndex: 0,
-                    currentInstruction: session[currentGuideIndex].instructions[0],
-                });
-                break;
-            case 'paused':
-                this.setState({ guideState: 'playing' });
-                break;
-            case 'finished':
-                this.incrementInstructionOrGuide();
-                break;
+        const { navigate } = this.props.navigation;
+
+        if (currentGuideIndex === session.length - 1) {
+            navigate('HomeScreen');
+        } else {
+            switch(guideState) {
+                case 'playing':
+                    this.setState({
+                        guideState: 'paused',
+                        currentInstructionIndex: 0,
+                        currentInstruction: session[currentGuideIndex].instructions[0],
+                    });
+                    break;
+                case 'paused':
+                    this.setState({ guideState: 'playing' });
+                    break;
+                case 'finished':
+                    this.incrementInstructionOrGuide();
+                    break;
+            }
         }
     }
 
@@ -175,23 +180,39 @@ export default class SessionPlayer extends Component {
         }
     }
 
-    navigateGuideButton = (iconName, onPressHandler) => {
+    navigateGuideButton = (iconName, onPressHandler, disabled) => {
+        const onPress = disabled ? () => {} : onPressHandler;
+        const style = disabled ? { opacity: 0.5 } : {};
+
         return (
             <Icon
                 name={iconName}
                 color="#FFD1D5"
                 size={36}
-                onPress={onPressHandler}
+                onPress={onPress}
+                style={style}
             />
         );
     }
 
     decrementGuideButton = () => {
-        return this.navigateGuideButton('ios-arrow-dropleft', this.decrementGuide);
+        const disabled = this.state.currentGuideIndex === 0;
+
+        return this.navigateGuideButton(
+            'ios-arrow-dropleft',
+            this.decrementGuide,
+            disabled
+        );
     }
 
     incrementGuideButton = () => {
-        return this.navigateGuideButton('ios-arrow-dropright', this.incrementGuide);
+        const disabled = this.state.currentGuideIndex === this.state.session.length - 1;
+
+        return this.navigateGuideButton(
+            'ios-arrow-dropright',
+            this.incrementGuide,
+            disabled
+        );
     }
 
     render() {
@@ -256,6 +277,10 @@ export default class SessionPlayer extends Component {
         );
     }
 }
+
+SessionPlayer.propTypes = {
+    navigation: PropTypes.object.isRequired,
+};
 
 const styles = StyleSheet.create({
     container: {
