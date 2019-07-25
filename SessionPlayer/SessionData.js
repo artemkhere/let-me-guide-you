@@ -5,34 +5,10 @@ export default {
                 guideName: 'Breathing',
                 instructions: [
                     { // An Instruction
-                        duration: [4, 2, 4, 1],
+                        duration: [1, 1, 1, 0],
                     },
                     { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
-                    },
-                    { // An Instruction
-                        duration: [4, 2, 4, 1],
+                        duration: [1, 1, 1, 0],
                     },
                 ]
             },
@@ -40,43 +16,11 @@ export default {
                 guideName: 'RepeatWords',
                 instructions: [
                     { // An Instruction
-                        duration: [1.5],
+                        duration: [0.5],
                         instructionsText: 'this is NOTHING to me!'
                     },
                     { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
+                        duration: [0.5],
                         instructionsText: 'this is NOTHING to me!'
                     },
                 ]
@@ -85,165 +29,8 @@ export default {
                 guideName: 'RepeatWords',
                 instructions: [
                     { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are just kids,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't understand"
-                    },
-
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: 'they all are children,'
-                    },
-                    { // An Instruction
-                        duration: [1.5],
-                        instructionsText: "they don't get it"
+                        duration: [0.5],
+                        instructionsText: 'another one!'
                     },
                 ]
             },
@@ -253,22 +40,6 @@ export default {
                     { // An Instruction
                         duration: [10],
                     }
-                ]
-            },
-            { // A Guide
-                guideName: 'OneInstruction',
-                instructions: [
-                    { // An Instruction
-                        instructionsText: 'Think of how you are going to seize the rest of your day.'
-                    },
-                ]
-            },
-            { // A Guide
-                guideName: 'OneInstruction',
-                instructions: [
-                    { // An Instruction
-                        instructionsText: 'I should see this.'
-                    },
                 ]
             },
         ],

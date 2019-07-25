@@ -8,14 +8,12 @@ export default class Playing extends Component {
 
         this.state = {
             wordsOpacity: new Animated.Value(0),
-            progressValueListener: null,
-            progressCircleAnimationProcess: null,
         }
     }
 
     componentDidMount() { this.startInstructionsTextAnimation(); }
 
-    componentWillUnmount() { Animated.timing(this.state.wordsOpacity).stop(); }
+    componentWillUnmount() { Animated.sequence(this.state.wordsOpacity).stop(); }
 
     startInstructionsTextAnimation = () => {
         const {
