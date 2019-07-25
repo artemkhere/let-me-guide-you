@@ -94,7 +94,7 @@ export default class SessionPlayer extends Component {
             });
         } else {
             this.setState({
-                guideState: 'session_finished',
+                guideState: 'finished',
             });
             console.log('All guides have been completed');
         }
@@ -172,9 +172,6 @@ export default class SessionPlayer extends Component {
             case 'finished':
                 return DisplayedInstruction =
                     Guides[currentGuide.guideName].Finished;
-            case 'session_finished':
-                return DisplayedInstruction =
-                    Guides.Global.SessionFinished;
         }
     }
 
