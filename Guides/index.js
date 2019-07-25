@@ -1,5 +1,4 @@
 import GlobalPaused from './Global/Paused';
-import GlobalSessionFinished from './Global/SessionFinished';
 
 import BreathingPlaying from './Breathing/Playing';
 import BreathingFinished from './Breathing/Finished';
@@ -13,10 +12,12 @@ import RepeatWordsFinished from './RepeatWords/Finished';
 import ClosedEyesPlaying from './ClosedEyes/Playing';
 import ClosedEyesFinished from './ClosedEyes/Finished';
 
+import OneInstructionPlaying from './OneInstruction/Playing';
+import OneInstructionFinished from './OneInstruction/Finished';
+
 export default {
     Global: {
         Paused: GlobalPaused,
-        SessionFinished: GlobalSessionFinished,
     },
     Breathing: {
         Playing: BreathingPlaying,
@@ -33,5 +34,9 @@ export default {
     ClosedEyes: {
         Playing: ClosedEyesPlaying,
         Finished: ClosedEyesFinished,
+    },
+    OneInstruction: {
+        Playing: OneInstructionPlaying,
+        Finished: OneInstructionFinished,
     }
 };
