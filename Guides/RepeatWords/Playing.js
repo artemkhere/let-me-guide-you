@@ -88,5 +88,6 @@ const styles = StyleSheet.create({
     instructionsText: {
         fontSize: 26,
         color: '#FFD1D5',
+        textAlign: 'center'
     },
 });

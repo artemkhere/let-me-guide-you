@@ -13,6 +13,12 @@ export default function HomeScreen(props) {
     return (
         <View style={styles.container}>
             <Button
+                title="People Are Silly"
+                onPress={() =>
+                    switchToSession(JSON.stringify(SessionData.peopleAreSilly))
+                }
+            />
+            <Button
                 title="Need For Clarity"
                 onPress={() =>
                     switchToSession(JSON.stringify(SessionData.needForClarity))
