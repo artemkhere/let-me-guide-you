@@ -164,5 +164,16 @@ export default {
                     },
                 ]
             },
-        ]
+        ],
+    drinkWater:
+        [
+            { // A Guide
+                guideName: 'DrinkWater',
+                instructions: [
+                    { // An Instruction
+                        instructionsText: "If you see this, it's a bug"
+                    },
+                ]
+            },
+        ],
 };
