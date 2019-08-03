@@ -11,7 +11,7 @@ export default class Playing extends Component {
     render() {
         return (
             <View style={styles.sceneArrangment}>
-                <Text style={styles.instructionsText}>{this.props.instructionsText}</Text>
+                <Text style={styles.instructionsText}>This is a bug if you see this text</Text>
             </View>
         );
     }

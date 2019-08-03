@@ -225,7 +225,7 @@ export default {
                 guideName: 'DrinkWater',
                 instructions: [
                     { // An Instruction
-                        instructionsText: "If you see this, it's a bug"
+                        instructionsText: "Go grab some water."
                     },
                 ]
             },
