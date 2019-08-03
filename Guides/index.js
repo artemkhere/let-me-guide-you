@@ -15,6 +15,9 @@ import ClosedEyesFinished from './ClosedEyes/Finished';
 import OneInstructionPlaying from './OneInstruction/Playing';
 import OneInstructionFinished from './OneInstruction/Finished';
 
+import DrinkWaterPlaying from './DrinkWater/Playing';
+import DrinkWaterFinished from './DrinkWater/Finished';
+
 export default {
     Global: {
         Paused: GlobalPaused,
@@ -38,5 +41,9 @@ export default {
     OneInstruction: {
         Playing: OneInstructionPlaying,
         Finished: OneInstructionFinished,
-    }
+    },
+    DrinkWater: {
+        Playing: DrinkWaterPlaying,
+        Finished: DrinkWaterFinished,
+    },
 };

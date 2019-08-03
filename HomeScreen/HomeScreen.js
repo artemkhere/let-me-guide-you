@@ -36,6 +36,12 @@ export default function HomeScreen(props) {
                     switchToSession(JSON.stringify(SessionData.inspiration))
                 }
             />
+            <Button
+                title="Drink Water"
+                onPress={() =>
+                    switchToSession(JSON.stringify(SessionData.drinkWater))
+                }
+            />
         </View>
     );
 }
