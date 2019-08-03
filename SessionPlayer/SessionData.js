@@ -179,7 +179,7 @@ export default {
                 instructions: [
                     { // An Instruction
                         duration: [60],
-                        instructionsText: 'How you can become a better person today than I were yesterday?'
+                        instructionsText: 'How you can become a better person today than I was yesterday?'
                     },
                 ]
             },
@@ -282,28 +282,40 @@ export default {
                 ]
             },
         ],
-    doubt:
+    toughMoment:
         [ // A Session
             { // A Guide
-                guideName: 'PowerPose',
+                guideName: 'Breathing',
                 instructions: [
                     { // An Instruction
-                        duration: [10],
+                        duration: [4, 1, 3.5, 0],
                     },
-                    {
-                        duration: [10],
-                    }
-                ]
-            }
-        ],
-    motivation:
-        [
-            { // A Guide
-                guideName: 'ClosedEyes',
-                instructions: [
                     { // An Instruction
-                        duration: [10],
-                        instructionsText: 'How can you seize the rest of your day?'
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
+                    },
+                    { // An Instruction
+                        duration: [4, 1, 3.5, 0],
                     },
                 ]
             },
@@ -312,45 +324,68 @@ export default {
                 instructions: [
                     { // An Instruction
                         duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
+                        instructionsText: 'This is NOTHING to me!'
                     },
                     { // An Instruction
                         duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
+                        instructionsText: 'This is NOTHING to me!'
                     },
                     { // An Instruction
                         duration: [1.5],
-                        instructionsText: 'this is NOTHING to me!'
+                        instructionsText: 'This is NOTHING to me!'
                     },
-                ]
-            },
-        ],
-    inspiration:
-        [
-            { // A Guide
-                guideName: 'OneInstruction',
-                instructions: [
                     { // An Instruction
-                        instructionsText: 'Stop and think.'
+                        duration: [1.5],
+                        instructionsText: 'This is NOTHING to me!'
                     },
-                ]
-            },
-            { // A Guide
-                guideName: 'OneInstruction',
-                instructions: [
                     { // An Instruction
-                        instructionsText: 'I should see this.'
+                        duration: [1.5],
+                        instructionsText: 'This is NOTHING to me!'
+                    },
+                    { // An Instruction
+                        duration: [1.5],
+                        instructionsText: 'This is NOTHING to me!'
+                    },
+                    { // An Instruction
+                        duration: [1.5],
+                        instructionsText: 'This is NOTHING to me!'
+                    },
+                    { // An Instruction
+                        duration: [1.5],
+                        instructionsText: 'This is NOTHING to me!'
+                    },
+                    { // An Instruction
+                        duration: [1.5],
+                        instructionsText: 'This is NOTHING to me!'
+                    },
+                    { // An Instruction
+                        duration: [1.5],
+                        instructionsText: 'This is NOTHING to me!'
                     },
                 ]
             },
-        ],
-    drinkWater:
-        [
             { // A Guide
                 guideName: 'DrinkWater',
                 instructions: [
                     { // An Instruction
                         instructionsText: "If you see this, it's a bug"
+                    },
+                ]
+            },
+            { // A Guide
+                guideName: 'PowerPose',
+                instructions: [
+                    { // An Instruction
+                        duration: [30],
+                    }
+                ]
+            },
+            { // A Guide
+                guideName: 'ClosedEyes',
+                instructions: [
+                    { // An Instruction
+                        duration: [60],
+                        instructionsText: '“Am I really living my life or am I just waiting to reach the end?”'
                     },
                 ]
             },

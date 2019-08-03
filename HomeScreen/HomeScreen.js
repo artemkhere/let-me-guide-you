@@ -12,42 +12,30 @@ export default function HomeScreen(props) {
 
     return (
         <View style={styles.container}>
-            <Button
-                title="People Are Silly"
-                onPress={() =>
-                    switchToSession(JSON.stringify(SessionData.peopleAreSilly))
-                }
-            />
-            <Button
-                title="Need For Clarity"
-                onPress={() =>
-                    switchToSession(JSON.stringify(SessionData.needForClarity))
-                }
-            />
-            <Button
-                title="Doubt"
-                onPress={() =>
-                    switchToSession(JSON.stringify(SessionData.doubt))
-                }
-            />
-            <Button
-                title="Motivation"
-                onPress={() =>
-                    switchToSession(JSON.stringify(SessionData.motivation))
-                }
-            />
-            <Button
-                title="Inspiration"
-                onPress={() =>
-                    switchToSession(JSON.stringify(SessionData.inspiration))
-                }
-            />
-            <Button
-                title="Drink Water"
-                onPress={() =>
-                    switchToSession(JSON.stringify(SessionData.drinkWater))
-                }
-            />
+            <View style={styles.homeButtonContainer}>
+                <Button
+                    title="Tough Moment"
+                    onPress={() =>
+                        switchToSession(JSON.stringify(SessionData.toughMoment))
+                    }
+                />
+            </View>
+            <View style={styles.homeButtonContainer}>
+                <Button
+                    title="People Are Silly"
+                    onPress={() =>
+                        switchToSession(JSON.stringify(SessionData.peopleAreSilly))
+                    }
+                />
+            </View>
+            <View style={styles.homeButtonContainer}>
+                <Button
+                    title="Need For Clarity"
+                    onPress={() =>
+                        switchToSession(JSON.stringify(SessionData.needForClarity))
+                    }
+                />
+            </View>
         </View>
     );
 }
@@ -57,7 +45,11 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
+        display: 'flex',
         justifyContent: 'center',
+        flexDirection: 'column'
     },
+    homeButtonContainer: {
+        marginBottom: 16
+    }
 });
