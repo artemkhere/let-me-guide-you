@@ -1,36 +1,87 @@
 export default {
-    toughMoment:
+    // peopleAreSilly:
+    //     [ // A Session
+    //         { // A Guide
+    //             guideName: 'PowerPose',
+    //             instructions: [
+    //                 { // An Instruction
+    //                     duration: [10],
+    //                 },
+    //                 {
+    //                     duration: [10],
+    //                 }
+    //             ]
+    //         }
+    //     ],
+    needForClarity:
         [ // A Session
             { // A Guide
                 guideName: 'Breathing',
                 instructions: [
                     { // An Instruction
-                        duration: [1, 1, 1, 0],
+                        duration: [6, 1.5, 5, 1],
                     },
                     { // An Instruction
-                        duration: [1, 1, 1, 0],
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
                     },
                 ]
             },
             { // A Guide
-                guideName: 'RepeatWords',
+                guideName: 'Breathing',
                 instructions: [
                     { // An Instruction
-                        duration: [0.5],
-                        instructionsText: 'this is NOTHING to me!'
+                        duration: [6, 1.5, 5, 1],
                     },
                     { // An Instruction
-                        duration: [0.5],
-                        instructionsText: 'this is NOTHING to me!'
+                        duration: [6, 1.5, 5, 1],
                     },
-                ]
-            },
-            { // A Guide
-                guideName: 'RepeatWords',
-                instructions: [
                     { // An Instruction
-                        duration: [0.5],
-                        instructionsText: 'another one!'
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
+                    },
+                    { // An Instruction
+                        duration: [6, 1.5, 5, 1],
                     },
                 ]
             },
@@ -38,8 +89,17 @@ export default {
                 guideName: 'PowerPose',
                 instructions: [
                     { // An Instruction
-                        duration: [10],
+                        duration: [30],
                     }
+                ]
+            },
+            { // A Guide
+                guideName: 'ClosedEyes',
+                instructions: [
+                    { // An Instruction
+                        duration: [60],
+                        instructionsText: '“Am I stuck in a fixed mindset? How can I get into a growth mindset?”'
+                    },
                 ]
             },
         ],

@@ -13,9 +13,9 @@ export default function HomeScreen(props) {
     return (
         <View style={styles.container}>
             <Button
-                title="Tough Moment"
+                title="Need For Clarity"
                 onPress={() =>
-                    switchToSession(JSON.stringify(SessionData.toughMoment))
+                    switchToSession(JSON.stringify(SessionData.needForClarity))
                 }
             />
             <Button
